@@ -91,8 +91,10 @@ namespace WCFServiceClient
             this.User = loginForm.User;
             this.Show();
         }
-        private void UpdateUser()
+        private void UpdateUser(User user = null)
         {
+            if (user == null)
+                user = this.User;
             using (ContractClient client = new ContractClient())
             {
                 if (client.UpdateUser(this.User))
@@ -100,6 +102,13 @@ namespace WCFServiceClient
                 else
                     MessageBox.Show("User can't be updated.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void buttonChangeProfile_Click(object sender, EventArgs e)
+        {
+            var changeProfileForm = new ChangeProfileForm(this.User);
+            changeProfileForm.ShowDialog();
+            if (changeProfileForm.Result == ChangeProfileForm.Results.Apply)
+                this.UpdateUser(changeProfileForm.User);
         }
     }
 }

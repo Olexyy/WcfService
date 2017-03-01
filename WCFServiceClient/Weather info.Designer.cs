@@ -44,6 +44,7 @@
             this.labelDay = new System.Windows.Forms.Label();
             this.buttonDeleteAccount = new System.Windows.Forms.Button();
             this.buttonLogOut = new System.Windows.Forms.Button();
+            this.buttonChangeProfile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelLocation
@@ -160,9 +161,9 @@
             // 
             // buttonDeleteAccount
             // 
-            this.buttonDeleteAccount.Location = new System.Drawing.Point(144, 239);
+            this.buttonDeleteAccount.Location = new System.Drawing.Point(192, 239);
             this.buttonDeleteAccount.Name = "buttonDeleteAccount";
-            this.buttonDeleteAccount.Size = new System.Drawing.Size(94, 23);
+            this.buttonDeleteAccount.Size = new System.Drawing.Size(75, 23);
             this.buttonDeleteAccount.TabIndex = 14;
             this.buttonDeleteAccount.Text = "Delete account";
             this.buttonDeleteAccount.UseVisualStyleBackColor = true;
@@ -170,19 +171,30 @@
             // 
             // buttonLogOut
             // 
-            this.buttonLogOut.Location = new System.Drawing.Point(33, 239);
+            this.buttonLogOut.Location = new System.Drawing.Point(12, 239);
             this.buttonLogOut.Name = "buttonLogOut";
-            this.buttonLogOut.Size = new System.Drawing.Size(94, 23);
+            this.buttonLogOut.Size = new System.Drawing.Size(82, 23);
             this.buttonLogOut.TabIndex = 15;
             this.buttonLogOut.Text = "Log out";
             this.buttonLogOut.UseVisualStyleBackColor = true;
             this.buttonLogOut.Click += new System.EventHandler(this.buttonLogOut_Click);
+            // 
+            // buttonChangeProfile
+            // 
+            this.buttonChangeProfile.Location = new System.Drawing.Point(100, 239);
+            this.buttonChangeProfile.Name = "buttonChangeProfile";
+            this.buttonChangeProfile.Size = new System.Drawing.Size(85, 23);
+            this.buttonChangeProfile.TabIndex = 16;
+            this.buttonChangeProfile.Text = "Change profile";
+            this.buttonChangeProfile.UseVisualStyleBackColor = true;
+            this.buttonChangeProfile.Click += new System.EventHandler(this.buttonChangeProfile_Click);
             // 
             // WeatherInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(279, 274);
+            this.Controls.Add(this.buttonChangeProfile);
             this.Controls.Add(this.buttonLogOut);
             this.Controls.Add(this.buttonDeleteAccount);
             this.Controls.Add(this.textBoxDay);
@@ -226,6 +238,7 @@
         private System.Windows.Forms.Label labelDay;
         private System.Windows.Forms.Button buttonDeleteAccount;
         private System.Windows.Forms.Button buttonLogOut;
+        private System.Windows.Forms.Button buttonChangeProfile;
     }
 }
 

@@ -18,7 +18,12 @@ namespace Testing
                 bool exist = false;
                 var result = DB.Users.Where(i => i.Name == "www" && i.Password == "qwerty");
                 if (result.ToList().Count > 0)
-                    exist = true;
+                {
+                    var user = result.First();
+                    user.Name = "test";
+                    DB.Entry(user).State = EntityState.Modified;
+                    int res = DB.SaveChanges();
+                }
                 else
                     exist = false;
                 Console.ReadKey();
@@ -40,7 +45,7 @@ namespace Testing
             [MinLength(3)]
             [Required]
             public string Password { get; set; }
-            public Nullable<int> LastLogin { get; set; }
+            public Nullable<DateTime> LastLogin { get; set; }
         }
     }
 }
