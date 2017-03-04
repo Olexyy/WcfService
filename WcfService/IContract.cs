@@ -10,13 +10,13 @@ using System.Runtime.Serialization;
 namespace ServiceLibrary
 {
     [ServiceContract]
-    public interface IContractAlter
+    public interface IContractChat
     {
         [OperationContract]
         void GetData();
     }
         [ServiceContract]
-    public interface IContract
+    public interface IContractWeather
     {
         [OperationContract]
         WeathersCo GetWeather(string city);
