@@ -308,64 +308,64 @@ namespace WCFServiceClient.ServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IContract")]
-    public interface IContract {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IContractWeather")]
+    public interface IContractWeather {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContract/GetWeather", ReplyAction="http://tempuri.org/IContract/GetWeatherResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractWeather/GetWeather", ReplyAction="http://tempuri.org/IContractWeather/GetWeatherResponse")]
         WCFServiceClient.ServiceReference.WeathersCo GetWeather(string city);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContract/GetWeather", ReplyAction="http://tempuri.org/IContract/GetWeatherResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractWeather/GetWeather", ReplyAction="http://tempuri.org/IContractWeather/GetWeatherResponse")]
         System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.WeathersCo> GetWeatherAsync(string city);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContract/Authenticate", ReplyAction="http://tempuri.org/IContract/AuthenticateResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractWeather/Authenticate", ReplyAction="http://tempuri.org/IContractWeather/AuthenticateResponse")]
         WCFServiceClient.ServiceReference.User Authenticate(string name, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContract/Authenticate", ReplyAction="http://tempuri.org/IContract/AuthenticateResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractWeather/Authenticate", ReplyAction="http://tempuri.org/IContractWeather/AuthenticateResponse")]
         System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.User> AuthenticateAsync(string name, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContract/AddUser", ReplyAction="http://tempuri.org/IContract/AddUserResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractWeather/AddUser", ReplyAction="http://tempuri.org/IContractWeather/AddUserResponse")]
         WCFServiceClient.ServiceReference.User AddUser(string name, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContract/AddUser", ReplyAction="http://tempuri.org/IContract/AddUserResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractWeather/AddUser", ReplyAction="http://tempuri.org/IContractWeather/AddUserResponse")]
         System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.User> AddUserAsync(string name, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContract/DeleteUser", ReplyAction="http://tempuri.org/IContract/DeleteUserResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractWeather/DeleteUser", ReplyAction="http://tempuri.org/IContractWeather/DeleteUserResponse")]
         bool DeleteUser(WCFServiceClient.ServiceReference.User user);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContract/DeleteUser", ReplyAction="http://tempuri.org/IContract/DeleteUserResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractWeather/DeleteUser", ReplyAction="http://tempuri.org/IContractWeather/DeleteUserResponse")]
         System.Threading.Tasks.Task<bool> DeleteUserAsync(WCFServiceClient.ServiceReference.User user);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContract/UpdateUser", ReplyAction="http://tempuri.org/IContract/UpdateUserResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractWeather/UpdateUser", ReplyAction="http://tempuri.org/IContractWeather/UpdateUserResponse")]
         bool UpdateUser(WCFServiceClient.ServiceReference.User user);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContract/UpdateUser", ReplyAction="http://tempuri.org/IContract/UpdateUserResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractWeather/UpdateUser", ReplyAction="http://tempuri.org/IContractWeather/UpdateUserResponse")]
         System.Threading.Tasks.Task<bool> UpdateUserAsync(WCFServiceClient.ServiceReference.User user);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IContractChannel : WCFServiceClient.ServiceReference.IContract, System.ServiceModel.IClientChannel {
+    public interface IContractWeatherChannel : WCFServiceClient.ServiceReference.IContractWeather, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ContractClient : System.ServiceModel.ClientBase<WCFServiceClient.ServiceReference.IContract>, WCFServiceClient.ServiceReference.IContract {
+    public partial class ContractWeatherClient : System.ServiceModel.ClientBase<WCFServiceClient.ServiceReference.IContractWeather>, WCFServiceClient.ServiceReference.IContractWeather {
         
-        public ContractClient() {
+        public ContractWeatherClient() {
         }
         
-        public ContractClient(string endpointConfigurationName) : 
+        public ContractWeatherClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public ContractClient(string endpointConfigurationName, string remoteAddress) : 
+        public ContractWeatherClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ContractClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ContractWeatherClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ContractClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ContractWeatherClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
@@ -411,40 +411,40 @@ namespace WCFServiceClient.ServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IContractAlter")]
-    public interface IContractAlter {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IContractChat")]
+    public interface IContractChat {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractAlter/GetData", ReplyAction="http://tempuri.org/IContractAlter/GetDataResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/GetData", ReplyAction="http://tempuri.org/IContractChat/GetDataResponse")]
         void GetData();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractAlter/GetData", ReplyAction="http://tempuri.org/IContractAlter/GetDataResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/GetData", ReplyAction="http://tempuri.org/IContractChat/GetDataResponse")]
         System.Threading.Tasks.Task GetDataAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IContractAlterChannel : WCFServiceClient.ServiceReference.IContractAlter, System.ServiceModel.IClientChannel {
+    public interface IContractChatChannel : WCFServiceClient.ServiceReference.IContractChat, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ContractAlterClient : System.ServiceModel.ClientBase<WCFServiceClient.ServiceReference.IContractAlter>, WCFServiceClient.ServiceReference.IContractAlter {
+    public partial class ContractChatClient : System.ServiceModel.ClientBase<WCFServiceClient.ServiceReference.IContractChat>, WCFServiceClient.ServiceReference.IContractChat {
         
-        public ContractAlterClient() {
+        public ContractChatClient() {
         }
         
-        public ContractAlterClient(string endpointConfigurationName) : 
+        public ContractChatClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public ContractAlterClient(string endpointConfigurationName, string remoteAddress) : 
+        public ContractChatClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ContractAlterClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ContractChatClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ContractAlterClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ContractChatClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         

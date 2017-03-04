@@ -21,7 +21,7 @@ namespace WCFServiceClient
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            using (ContractClient client = new ContractClient())
+            using (ContractWeatherClient client = new ContractWeatherClient())
             {
                 this.User = client.Authenticate(this.textBoxLogin.Text.Trim(), this.textBoxPassword.Text.Trim());
                 if (this.User != null)
@@ -33,7 +33,7 @@ namespace WCFServiceClient
 
         private void buttonSignIn_Click(object sender, EventArgs e)
         {
-            using (ContractClient client = new ContractClient())
+            using (ContractWeatherClient client = new ContractWeatherClient())
             {
                 if(client.AddUser(this.textBoxLogin.Text.Trim(), this.textBoxPassword.Text.Trim()) != null)
                     MessageBox.Show("User added, please login.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
