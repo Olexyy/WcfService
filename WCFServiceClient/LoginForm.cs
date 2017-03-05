@@ -23,7 +23,13 @@ namespace WCFServiceClient
         {
             using (ContractWeatherClient client = new ContractWeatherClient())
             {
-                this.User = client.Authenticate(this.textBoxLogin.Text.Trim(), this.textBoxPassword.Text.Trim());
+                try
+                {
+                    this.User = client.Authenticate(this.textBoxLogin.Text.Trim(), this.textBoxPassword.Text.Trim());
+                } catch (Exception ex)
+                {
+                    var a = 1;
+                }
                 if (this.User != null)
                     this.Close();
                 else
