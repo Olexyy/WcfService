@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/ServiceLibrary" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IContractUser_Authenticate_InputMessage">
+    <wsdl:part name="parameters" element="tns:Authenticate" />
+  </wsdl:message>
+  <wsdl:message name="IContractUser_Authenticate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IContractUser_AddUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUser" />
+  </wsdl:message>
+  <wsdl:message name="IContractUser_AddUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IContractUser_DeleteUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="IContractUser_DeleteUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IContractUser_UpdateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUser" />
+  </wsdl:message>
+  <wsdl:message name="IContractUser_UpdateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IContractWeather_GetWeather_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWeather" />
+  </wsdl:message>
+  <wsdl:message name="IContractWeather_GetWeather_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWeatherResponse" />
+  </wsdl:message>
+  <wsdl:message name="IContractChat_GetMessages_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMessages" />
+  </wsdl:message>
+  <wsdl:message name="IContractChat_GetMessages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMessagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IContractChat_PushMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:PushMessage" />
+  </wsdl:message>
+  <wsdl:message name="IContractChat_PushMessage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PushMessageResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IContractUser">
+    <wsdl:operation name="Authenticate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IContractUser/Authenticate" message="tns:IContractUser_Authenticate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IContractUser/AuthenticateResponse" message="tns:IContractUser_Authenticate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IContractUser/AddUser" message="tns:IContractUser_AddUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IContractUser/AddUserResponse" message="tns:IContractUser_AddUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IContractUser/DeleteUser" message="tns:IContractUser_DeleteUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IContractUser/DeleteUserResponse" message="tns:IContractUser_DeleteUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IContractUser/UpdateUser" message="tns:IContractUser_UpdateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IContractUser/UpdateUserResponse" message="tns:IContractUser_UpdateUser_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IContractWeather">
+    <wsdl:operation name="GetWeather">
+      <wsdl:input wsaw:Action="http://tempuri.org/IContractWeather/GetWeather" message="tns:IContractWeather_GetWeather_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IContractWeather/GetWeatherResponse" message="tns:IContractWeather_GetWeather_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IContractChat">
+    <wsdl:operation name="GetMessages">
+      <wsdl:input wsaw:Action="http://tempuri.org/IContractChat/GetMessages" message="tns:IContractChat_GetMessages_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IContractChat/GetMessagesResponse" message="tns:IContractChat_GetMessages_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PushMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IContractChat/PushMessage" message="tns:IContractChat_PushMessage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IContractChat/PushMessageResponse" message="tns:IContractChat_PushMessage_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IContractUser" type="tns:IContractUser">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Authenticate">
+      <soap:operation soapAction="http://tempuri.org/IContractUser/Authenticate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <soap:operation soapAction="http://tempuri.org/IContractUser/AddUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap:operation soapAction="http://tempuri.org/IContractUser/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap:operation soapAction="http://tempuri.org/IContractUser/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IContractWeather" type="tns:IContractWeather">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetWeather">
+      <soap:operation soapAction="http://tempuri.org/IContractWeather/GetWeather" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IContractChat" type="tns:IContractChat">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetMessages">
+      <soap:operation soapAction="http://tempuri.org/IContractChat/GetMessages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PushMessage">
+      <soap:operation soapAction="http://tempuri.org/IContractChat/PushMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="BasicHttpBinding_IContractUser" binding="tns:BasicHttpBinding_IContractUser">
+      <soap:address location="http://testforfree.somee.com/Service.svc/user" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IContractWeather" binding="tns:BasicHttpBinding_IContractWeather">
+      <soap:address location="http://testforfree.somee.com/Service.svc/weather" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IContractChat" binding="tns:BasicHttpBinding_IContractChat">
+      <soap:address location="http://testforfree.somee.com/Service.svc/chat" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

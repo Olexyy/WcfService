@@ -66,7 +66,7 @@ namespace WCFServiceClient
         }
         private void buttonDeleteAccount_Click(object sender, EventArgs e)
         {
-            using (ContractWeatherClient client = new ContractWeatherClient())
+            using (ContractUserClient client = new ContractUserClient())
             {
                 if (client.DeleteUser(this.User))
                 {
@@ -95,7 +95,7 @@ namespace WCFServiceClient
         {
             if (user == null)
                 user = this.User;
-            using (ContractWeatherClient client = new ContractWeatherClient())
+            using (ContractUserClient client = new ContractUserClient())
             {
                 if (client.UpdateUser(this.User))
                     MessageBox.Show("User updated.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);

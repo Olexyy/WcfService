@@ -6,20 +6,13 @@ using System.Web.Script.Serialization;
 using System.IO;
 using System.Data.Entity;
 using System.Runtime.Serialization;
+using System.Collections.Generic;
 
 namespace ServiceLibrary
 {
     [ServiceContract]
-    public interface IContractChat
+    public interface IContractUser
     {
-        [OperationContract]
-        void GetData();
-    }
-        [ServiceContract]
-    public interface IContractWeather
-    {
-        [OperationContract]
-        WeathersCo GetWeather(string city);
         [OperationContract]
         User Authenticate(string name, string password);
         [OperationContract]
@@ -28,6 +21,20 @@ namespace ServiceLibrary
         bool DeleteUser(User user);
         [OperationContract]
         bool UpdateUser(User user);
+    }
+    [ServiceContract]
+    public interface IContractChat
+    {
+        [OperationContract]
+        List<ChatMessage> GetMessages();
+        [OperationContract]
+        void PushMessage(string message);
+    }
+    [ServiceContract]
+    public interface IContractWeather
+    {
+        [OperationContract]
+        WeathersCo GetWeather(string city);
     }
     [DataContract]
     public class WeathersCo
@@ -54,5 +61,15 @@ namespace ServiceLibrary
             [DataMember]
             public string day { get; set; }
         }
+    }
+    [DataContract]
+    public class ChatMessage
+    {
+        [DataMember]
+        public string Text { get; set; }
+        [DataMember]
+        public string Type { get; set; }
+        [DataMember]
+        public User User { get; set; }
     }
 }

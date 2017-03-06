@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WCFServiceClient.ServiceReference;
 
-namespace WCFServiceClient
+namespace ChatClient
 {
     public partial class LoginForm : Form
     {

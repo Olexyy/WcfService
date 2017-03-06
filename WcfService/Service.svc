@@ -8,32 +8,52 @@ using System.Web.Script.Serialization;
 using System.IO;
 using System.Data.Entity;
 using System.Runtime.Serialization;
+using System.Collections.Generic;
 
 namespace ServiceLibrary
 {
-
-    public class Service : IContractChat, IContractWeather
+    public class Service : IContractChat, IContractWeather, IContractUser
     {
-        public void GetData()
+        public static List<Service> Services { get; set; }
+
+        private List<ChatMessage> Messages { get; set; }
+
+        private User User { get; set; }
+
+        static Service()
         {
-            // here is method that runs on different EndPoint with different behavior(service behavior, binding type)
+            Service.Services = new List<Service>();
         }
-        public WeathersCo GetWeather(string city)
+        public Service()
         {
-            HttpWebRequest webRequest = HttpWebRequest.CreateHttp(@"http://weathers.co/api.php?city=" + city.Trim());
-            using (HttpWebResponse webResponse = webRequest.GetResponse() as HttpWebResponse)
+            Service.Services.Add(this);
+            this.Messages = new List<ChatMessage>();
+            this.Messages.Add(new ChatMessage() { Text = Service.Services.Count.ToString(), User = null, Type = "service_total" });
+        }
+        ~Service()
+        {
+            Service.Services.Remove(this);
+        }
+        private void Announce(string text, User user)
+        {
+            foreach (Service service in Service.Services)
             {
-                using (StreamReader streamReader = new StreamReader(webResponse.GetResponseStream()))
-                {
-                    JavaScriptSerializer Json = new JavaScriptSerializer();
-                    try
-                    {
-                        return Json.Deserialize<WeathersCo>(streamReader.ReadToEnd());
-                    }
-                    finally { }
-                }
+                var message = new ChatMessage() { User = this.User, Text = text, Type = "new_messages" };
+                service.Messages.Add(message);
             }
         }
+        public void PushMessage(string message)
+        {
+            if(this.User != null)
+                this.Announce(message, this.User);
+        }
+        public List<ChatMessage> GetMessages()
+        {
+            var messages = this.Messages;
+            this.Messages = new List<ChatMessage>();
+            return messages;
+        }
+        // USER IMPLEMENTATION
         public User Authenticate(string name, string password)
         {
             using (DBContext DB = new DBContext())
@@ -44,9 +64,9 @@ namespace ServiceLibrary
                     var user = result.First();
                     user.LastLogin = DateTime.Now;
                     this.UpdateUser(user);
-                    return result.First();
+                    this.User = user;
+                    return user;
                 }
-
                 return null;
             }
         }
@@ -98,6 +118,22 @@ namespace ServiceLibrary
                 catch (Exception e)
                 {
                     return false;
+                }
+            }
+        }
+        public WeathersCo GetWeather(string city)
+        {
+            HttpWebRequest webRequest = HttpWebRequest.CreateHttp(@"http://weathers.co/api.php?city=" + city.Trim());
+            using (HttpWebResponse webResponse = webRequest.GetResponse() as HttpWebResponse)
+            {
+                using (StreamReader streamReader = new StreamReader(webResponse.GetResponseStream()))
+                {
+                    JavaScriptSerializer Json = new JavaScriptSerializer();
+                    try
+                    {
+                        return Json.Deserialize<WeathersCo>(streamReader.ReadToEnd());
+                    }
+                    finally { }
                 }
             }
         }
