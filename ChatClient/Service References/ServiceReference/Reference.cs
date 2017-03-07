@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WCFServiceClient.ServiceReference {
+namespace ChatClient.ServiceReference {
     using System.Runtime.Serialization;
     using System;
     
@@ -119,7 +119,7 @@ namespace WCFServiceClient.ServiceReference {
         private string apiVersionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WCFServiceClient.ServiceReference.WeathersCo.WeathersCoData dataField;
+        private ChatClient.ServiceReference.WeathersCo.WeathersCoData dataField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -145,7 +145,7 @@ namespace WCFServiceClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WCFServiceClient.ServiceReference.WeathersCo.WeathersCoData data {
+        public ChatClient.ServiceReference.WeathersCo.WeathersCoData data {
             get {
                 return this.dataField;
             }
@@ -323,7 +323,7 @@ namespace WCFServiceClient.ServiceReference {
         private string TypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WCFServiceClient.ServiceReference.User UserField;
+        private ChatClient.ServiceReference.User UserField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -362,7 +362,7 @@ namespace WCFServiceClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WCFServiceClient.ServiceReference.User User {
+        public ChatClient.ServiceReference.User User {
             get {
                 return this.UserField;
             }
@@ -389,37 +389,37 @@ namespace WCFServiceClient.ServiceReference {
     public interface IContractUser {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/Authenticate", ReplyAction="http://tempuri.org/IContractUser/AuthenticateResponse")]
-        WCFServiceClient.ServiceReference.User Authenticate(string name, string password);
+        ChatClient.ServiceReference.User Authenticate(string name, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/Authenticate", ReplyAction="http://tempuri.org/IContractUser/AuthenticateResponse")]
-        System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.User> AuthenticateAsync(string name, string password);
+        System.Threading.Tasks.Task<ChatClient.ServiceReference.User> AuthenticateAsync(string name, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/AddUser", ReplyAction="http://tempuri.org/IContractUser/AddUserResponse")]
-        WCFServiceClient.ServiceReference.User AddUser(string name, string password);
+        ChatClient.ServiceReference.User AddUser(string name, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/AddUser", ReplyAction="http://tempuri.org/IContractUser/AddUserResponse")]
-        System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.User> AddUserAsync(string name, string password);
+        System.Threading.Tasks.Task<ChatClient.ServiceReference.User> AddUserAsync(string name, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/DeleteUser", ReplyAction="http://tempuri.org/IContractUser/DeleteUserResponse")]
-        bool DeleteUser(WCFServiceClient.ServiceReference.User user);
+        bool DeleteUser(ChatClient.ServiceReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/DeleteUser", ReplyAction="http://tempuri.org/IContractUser/DeleteUserResponse")]
-        System.Threading.Tasks.Task<bool> DeleteUserAsync(WCFServiceClient.ServiceReference.User user);
+        System.Threading.Tasks.Task<bool> DeleteUserAsync(ChatClient.ServiceReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/UpdateUser", ReplyAction="http://tempuri.org/IContractUser/UpdateUserResponse")]
-        bool UpdateUser(WCFServiceClient.ServiceReference.User user);
+        bool UpdateUser(ChatClient.ServiceReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/UpdateUser", ReplyAction="http://tempuri.org/IContractUser/UpdateUserResponse")]
-        System.Threading.Tasks.Task<bool> UpdateUserAsync(WCFServiceClient.ServiceReference.User user);
+        System.Threading.Tasks.Task<bool> UpdateUserAsync(ChatClient.ServiceReference.User user);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IContractUserChannel : WCFServiceClient.ServiceReference.IContractUser, System.ServiceModel.IClientChannel {
+    public interface IContractUserChannel : ChatClient.ServiceReference.IContractUser, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ContractUserClient : System.ServiceModel.ClientBase<WCFServiceClient.ServiceReference.IContractUser>, WCFServiceClient.ServiceReference.IContractUser {
+    public partial class ContractUserClient : System.ServiceModel.ClientBase<ChatClient.ServiceReference.IContractUser>, ChatClient.ServiceReference.IContractUser {
         
         public ContractUserClient() {
         }
@@ -440,35 +440,35 @@ namespace WCFServiceClient.ServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public WCFServiceClient.ServiceReference.User Authenticate(string name, string password) {
+        public ChatClient.ServiceReference.User Authenticate(string name, string password) {
             return base.Channel.Authenticate(name, password);
         }
         
-        public System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.User> AuthenticateAsync(string name, string password) {
+        public System.Threading.Tasks.Task<ChatClient.ServiceReference.User> AuthenticateAsync(string name, string password) {
             return base.Channel.AuthenticateAsync(name, password);
         }
         
-        public WCFServiceClient.ServiceReference.User AddUser(string name, string password) {
+        public ChatClient.ServiceReference.User AddUser(string name, string password) {
             return base.Channel.AddUser(name, password);
         }
         
-        public System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.User> AddUserAsync(string name, string password) {
+        public System.Threading.Tasks.Task<ChatClient.ServiceReference.User> AddUserAsync(string name, string password) {
             return base.Channel.AddUserAsync(name, password);
         }
         
-        public bool DeleteUser(WCFServiceClient.ServiceReference.User user) {
+        public bool DeleteUser(ChatClient.ServiceReference.User user) {
             return base.Channel.DeleteUser(user);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteUserAsync(WCFServiceClient.ServiceReference.User user) {
+        public System.Threading.Tasks.Task<bool> DeleteUserAsync(ChatClient.ServiceReference.User user) {
             return base.Channel.DeleteUserAsync(user);
         }
         
-        public bool UpdateUser(WCFServiceClient.ServiceReference.User user) {
+        public bool UpdateUser(ChatClient.ServiceReference.User user) {
             return base.Channel.UpdateUser(user);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateUserAsync(WCFServiceClient.ServiceReference.User user) {
+        public System.Threading.Tasks.Task<bool> UpdateUserAsync(ChatClient.ServiceReference.User user) {
             return base.Channel.UpdateUserAsync(user);
         }
     }
@@ -478,19 +478,19 @@ namespace WCFServiceClient.ServiceReference {
     public interface IContractWeather {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractWeather/GetWeather", ReplyAction="http://tempuri.org/IContractWeather/GetWeatherResponse")]
-        WCFServiceClient.ServiceReference.WeathersCo GetWeather(string city);
+        ChatClient.ServiceReference.WeathersCo GetWeather(string city);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractWeather/GetWeather", ReplyAction="http://tempuri.org/IContractWeather/GetWeatherResponse")]
-        System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.WeathersCo> GetWeatherAsync(string city);
+        System.Threading.Tasks.Task<ChatClient.ServiceReference.WeathersCo> GetWeatherAsync(string city);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IContractWeatherChannel : WCFServiceClient.ServiceReference.IContractWeather, System.ServiceModel.IClientChannel {
+    public interface IContractWeatherChannel : ChatClient.ServiceReference.IContractWeather, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ContractWeatherClient : System.ServiceModel.ClientBase<WCFServiceClient.ServiceReference.IContractWeather>, WCFServiceClient.ServiceReference.IContractWeather {
+    public partial class ContractWeatherClient : System.ServiceModel.ClientBase<ChatClient.ServiceReference.IContractWeather>, ChatClient.ServiceReference.IContractWeather {
         
         public ContractWeatherClient() {
         }
@@ -511,11 +511,11 @@ namespace WCFServiceClient.ServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public WCFServiceClient.ServiceReference.WeathersCo GetWeather(string city) {
+        public ChatClient.ServiceReference.WeathersCo GetWeather(string city) {
             return base.Channel.GetWeather(city);
         }
         
-        public System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.WeathersCo> GetWeatherAsync(string city) {
+        public System.Threading.Tasks.Task<ChatClient.ServiceReference.WeathersCo> GetWeatherAsync(string city) {
             return base.Channel.GetWeatherAsync(city);
         }
     }
@@ -525,10 +525,10 @@ namespace WCFServiceClient.ServiceReference {
     public interface IContractChat {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/GetMessages", ReplyAction="http://tempuri.org/IContractChat/GetMessagesResponse")]
-        WCFServiceClient.ServiceReference.ChatMessage[] GetMessages();
+        ChatClient.ServiceReference.ChatMessage[] GetMessages();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/GetMessages", ReplyAction="http://tempuri.org/IContractChat/GetMessagesResponse")]
-        System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.ChatMessage[]> GetMessagesAsync();
+        System.Threading.Tasks.Task<ChatClient.ServiceReference.ChatMessage[]> GetMessagesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/PushMessage", ReplyAction="http://tempuri.org/IContractChat/PushMessageResponse")]
         void PushMessage(string message);
@@ -550,12 +550,12 @@ namespace WCFServiceClient.ServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IContractChatChannel : WCFServiceClient.ServiceReference.IContractChat, System.ServiceModel.IClientChannel {
+    public interface IContractChatChannel : ChatClient.ServiceReference.IContractChat, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ContractChatClient : System.ServiceModel.ClientBase<WCFServiceClient.ServiceReference.IContractChat>, WCFServiceClient.ServiceReference.IContractChat {
+    public partial class ContractChatClient : System.ServiceModel.ClientBase<ChatClient.ServiceReference.IContractChat>, ChatClient.ServiceReference.IContractChat {
         
         public ContractChatClient() {
         }
@@ -576,11 +576,11 @@ namespace WCFServiceClient.ServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public WCFServiceClient.ServiceReference.ChatMessage[] GetMessages() {
+        public ChatClient.ServiceReference.ChatMessage[] GetMessages() {
             return base.Channel.GetMessages();
         }
         
-        public System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.ChatMessage[]> GetMessagesAsync() {
+        public System.Threading.Tasks.Task<ChatClient.ServiceReference.ChatMessage[]> GetMessagesAsync() {
             return base.Channel.GetMessagesAsync();
         }
         

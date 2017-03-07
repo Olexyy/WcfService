@@ -1,4 +1,4 @@
-﻿namespace WCFServiceClient
+﻿namespace ChatClient
 {
     partial class LoginForm
     {

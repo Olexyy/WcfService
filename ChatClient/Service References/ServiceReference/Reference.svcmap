@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d246273c-a442-48e7-bd29-8c4d131bd111" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e4c63100-4d9f-413f-aa00-d2fda23dc542" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,10 +22,10 @@
     <MetadataSource Address="http://testforfree.somee.com/Service.svc/mex/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="f3be10de-8506-4afe-b2e2-23628db12060" SourceId="1" SourceUrl="http://testforfree.somee.com/Service.svc/mex/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="79b26d45-a3a2-49e2-bc00-3b8c7555c9db" SourceId="1" SourceUrl="http://testforfree.somee.com/Service.svc/mex/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="d6b1796b-e387-4106-b8b3-9e5feff6da6e" SourceId="1" SourceUrl="http://testforfree.somee.com/Service.svc/mex/mex" />
-    <MetadataFile FileName="ServiceLibrary.xsd" MetadataType="Schema" ID="96408196-eefd-4521-a393-fb37b360a44f" SourceId="1" SourceUrl="http://testforfree.somee.com/Service.svc/mex/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="7863260a-fdf2-4c85-a55e-44cd3d9d8b4a" SourceId="1" SourceUrl="http://testforfree.somee.com/Service.svc/mex/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="f7cc0d58-8bca-4734-9120-7468fc218fa7" SourceId="1" SourceUrl="http://testforfree.somee.com/Service.svc/mex/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="8e1db0e3-5731-4553-9f2e-4284506edb29" SourceId="1" SourceUrl="http://testforfree.somee.com/Service.svc/mex/mex" />
+    <MetadataFile FileName="ServiceLibrary.xsd" MetadataType="Schema" ID="80f16b58-5ac6-4cda-b9cd-7d417a25d22a" SourceId="1" SourceUrl="http://testforfree.somee.com/Service.svc/mex/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

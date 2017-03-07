@@ -22,13 +22,17 @@ namespace ServiceLibrary
         [OperationContract]
         bool UpdateUser(User user);
     }
-    [ServiceContract]
+    [ServiceContract(SessionMode = SessionMode.Required)]
     public interface IContractChat
     {
         [OperationContract]
         List<ChatMessage> GetMessages();
         [OperationContract]
         void PushMessage(string message);
+        [OperationContract]
+        bool LogIn(string name, string password);
+        [OperationContract]
+        bool LogOut();
     }
     [ServiceContract]
     public interface IContractWeather

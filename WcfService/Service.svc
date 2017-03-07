@@ -12,6 +12,7 @@ using System.Collections.Generic;
 
 namespace ServiceLibrary
 {
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession, ConcurrencyMode = ConcurrencyMode.Single)]
     public class Service : IContractChat, IContractWeather, IContractUser
     {
         public static List<Service> Services { get; set; }
@@ -20,17 +21,17 @@ namespace ServiceLibrary
 
         private User User { get; set; }
 
-        static Service()
-        {
-            Service.Services = new List<Service>();
-        }
         public Service()
         {
+            if(Service.Services == null)
+                Service.Services = new List<Service>();
             Service.Services.Add(this);
+            OperationContext.Current.OperationCompleted += this.ServiceSessionClosed;
             this.Messages = new List<ChatMessage>();
             this.Messages.Add(new ChatMessage() { Text = Service.Services.Count.ToString(), User = null, Type = "service_total" });
         }
-        ~Service()
+        //won't work for Single/PerCall InstanceContextMode.
+        private void ServiceSessionClosed(object sender, EventArgs e)
         {
             Service.Services.Remove(this);
         }
@@ -52,6 +53,32 @@ namespace ServiceLibrary
             var messages = this.Messages;
             this.Messages = new List<ChatMessage>();
             return messages;
+        }
+        public bool LogIn(string name, string password)
+        {
+            using (DBContext DB = new DBContext())
+            {
+                var result = DB.Users.Where(i => i.Name == name && i.Password == password).ToList();
+                if (result.Count > 0)
+                {
+                    var user = result.First();
+                    user.LastLogin = DateTime.Now;
+                    this.UpdateUser(user);
+                    this.User = user;
+                    return true;
+                }
+                return false;
+            }
+        }
+        public bool LogOut()
+        {
+            if (this.User == null)
+                return false;
+            else
+            {
+                this.User = null;
+                return true;
+            }
         }
         // USER IMPLEMENTATION
         public User Authenticate(string name, string password)

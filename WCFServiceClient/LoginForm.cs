@@ -26,14 +26,15 @@ namespace WCFServiceClient
                 try
                 {
                     this.User = client.Authenticate(this.textBoxLogin.Text.Trim(), this.textBoxPassword.Text.Trim());
+                    if (this.User != null)
+                        this.Close();
+                    else
+                        MessageBox.Show("Service available for registered users only.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 } catch
                 {
                     MessageBox.Show("Service unavailable.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
                 }
-                if (this.User != null)
-                    this.Close();
-                else
-                    MessageBox.Show("Service available for registered users only.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
             }
         }
 
