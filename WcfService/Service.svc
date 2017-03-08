@@ -13,40 +13,48 @@ using System.Collections.Generic;
 namespace ServiceLibrary
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession, ConcurrencyMode = ConcurrencyMode.Single)]
-    public class Service : IContractChat, IContractWeather, IContractUser
+    public class Service : IContractChat, IContractWeather
     {
-        public static List<Service> Services { get; set; }
+        private static List<Service> Services { get; set; }
+
+        private static List<Service> Users { get { return Service.Services.Where(i => i.User != null).ToList(); } }
 
         private List<ChatMessage> Messages { get; set; }
 
         private User User { get; set; }
 
+        static Service()
+        {
+            Service.Services = new List<Service>();
+        }
         public Service()
         {
-            if(Service.Services == null)
-                Service.Services = new List<Service>();
-            Service.Services.Add(this);
-            OperationContext.Current.OperationCompleted += this.ServiceSessionClosed;
+            this.User = null;
             this.Messages = new List<ChatMessage>();
-            this.Messages.Add(new ChatMessage() { Text = Service.Services.Count.ToString(), User = null, Type = "service_total" });
+            // Won't work for Single/PerCall InstanceContextMode.
+            OperationContext.Current.InstanceContext.Closing += this.ServiceSessionClosed;
+            Service.Services.Add(this);
+            this.AnnounceAll(Service.Services.Count.ToString(), ChatMessageTypes.UsersTotal);
+            this.Messages.Add(new ChatMessage() { Text = Service.Users.Count.ToString(), User = null, Type = ChatMessageTypes.UsersRegistered });
         }
-        //won't work for Single/PerCall InstanceContextMode.
+        private void AnnounceUsers(string text, ChatMessageTypes type, User user = null)
+        {
+            foreach (Service service in Service.Users)
+                service.Messages.Add(new ChatMessage() { User = this.User, Text = text, Type = type });
+        }
+        private void AnnounceAll(string text, ChatMessageTypes type, User user = null)
+        {
+            foreach (Service service in Service.Services)
+                service.Messages.Add(new ChatMessage() { User = this.User, Text = text, Type = type });
+        }
         private void ServiceSessionClosed(object sender, EventArgs e)
         {
             Service.Services.Remove(this);
-        }
-        private void Announce(string text, User user)
-        {
-            foreach (Service service in Service.Services)
-            {
-                var message = new ChatMessage() { User = this.User, Text = text, Type = "new_messages" };
-                service.Messages.Add(message);
-            }
+            this.AnnounceAll(Service.Services.Count.ToString(), ChatMessageTypes.UsersTotal);
         }
         public void PushMessage(string message)
         {
-            if(this.User != null)
-                this.Announce(message, this.User);
+            this.AnnounceUsers(message, ChatMessageTypes.Posting, this.User);
         }
         public List<ChatMessage> GetMessages()
         {
@@ -65,6 +73,7 @@ namespace ServiceLibrary
                     user.LastLogin = DateTime.Now;
                     this.UpdateUser(user);
                     this.User = user;
+                    this.AnnounceAll(Service.Users.Count.ToString(), ChatMessageTypes.UsersRegistered);
                     return true;
                 }
                 return false;
@@ -77,10 +86,10 @@ namespace ServiceLibrary
             else
             {
                 this.User = null;
+                this.AnnounceAll(Service.Users.Count.ToString(), ChatMessageTypes.UsersRegistered);
                 return true;
             }
         }
-        // USER IMPLEMENTATION
         public User Authenticate(string name, string password)
         {
             using (DBContext DB = new DBContext())
@@ -96,6 +105,12 @@ namespace ServiceLibrary
                 }
                 return null;
             }
+        }
+        public User GetUser()
+        {
+            if (this.User != null)
+                return this.User;
+            return null;
         }
         public User AddUser(string name, string password)
         {
@@ -124,6 +139,7 @@ namespace ServiceLibrary
                 {
                     DB.Entry(user).State = EntityState.Modified;
                     DB.SaveChanges();
+                    this.User = user;
                     return true;
                 }
                 catch (Exception e)
@@ -140,6 +156,7 @@ namespace ServiceLibrary
                 {
                     DB.Users.Remove(user);
                     DB.SaveChanges();
+                    this.User = null;
                     return true;
                 }
                 catch (Exception e)
@@ -148,6 +165,7 @@ namespace ServiceLibrary
                 }
             }
         }
+        //***Weather implementation****//
         public WeathersCo GetWeather(string city)
         {
             HttpWebRequest webRequest = HttpWebRequest.CreateHttp(@"http://weathers.co/api.php?city=" + city.Trim());

@@ -10,19 +10,8 @@ using System.Collections.Generic;
 
 namespace ServiceLibrary
 {
-    [ServiceContract]
-    public interface IContractUser
-    {
-        [OperationContract]
-        User Authenticate(string name, string password);
-        [OperationContract]
-        User AddUser(string name, string password);
-        [OperationContract]
-        bool DeleteUser(User user);
-        [OperationContract]
-        bool UpdateUser(User user);
-    }
     [ServiceContract(SessionMode = SessionMode.Required)]
+    [ServiceKnownType(typeof(ChatMessageTypes))]
     public interface IContractChat
     {
         [OperationContract]
@@ -33,6 +22,16 @@ namespace ServiceLibrary
         bool LogIn(string name, string password);
         [OperationContract]
         bool LogOut();
+        [OperationContract]
+        User Authenticate(string name, string password);
+        [OperationContract]
+        User GetUser();
+        [OperationContract]
+        User AddUser(string name, string password);
+        [OperationContract]
+        bool DeleteUser(User user);
+        [OperationContract]
+        bool UpdateUser(User user);
     }
     [ServiceContract]
     public interface IContractWeather
@@ -72,8 +71,10 @@ namespace ServiceLibrary
         [DataMember]
         public string Text { get; set; }
         [DataMember]
-        public string Type { get; set; }
+        public ChatMessageTypes Type { get; set; }
         [DataMember]
         public User User { get; set; }
     }
+    [DataContract]
+    public enum ChatMessageTypes { [EnumMember] Posting, [EnumMember] UsersTotal, [EnumMember] UsersRegistered }
 }

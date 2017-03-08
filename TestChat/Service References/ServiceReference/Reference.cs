@@ -8,103 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WCFServiceClient.ServiceReference {
+namespace TestChat.ServiceReference {
     using System.Runtime.Serialization;
     using System;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/ServiceLibrary")]
-    [System.SerializableAttribute()]
-    public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.DateTime> LastLoginField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PasswordField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int UserIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.DateTime> LastLogin {
-            get {
-                return this.LastLoginField;
-            }
-            set {
-                if ((this.LastLoginField.Equals(value) != true)) {
-                    this.LastLoginField = value;
-                    this.RaisePropertyChanged("LastLogin");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
-            get {
-                return this.NameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Password {
-            get {
-                return this.PasswordField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
-                    this.PasswordField = value;
-                    this.RaisePropertyChanged("Password");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int UserId {
-            get {
-                return this.UserIdField;
-            }
-            set {
-                if ((this.UserIdField.Equals(value) != true)) {
-                    this.UserIdField = value;
-                    this.RaisePropertyChanged("UserId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -119,7 +26,7 @@ namespace WCFServiceClient.ServiceReference {
         private string apiVersionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WCFServiceClient.ServiceReference.WeathersCo.WeathersCoData dataField;
+        private TestChat.ServiceReference.WeathersCo.WeathersCoData dataField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -145,7 +52,7 @@ namespace WCFServiceClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WCFServiceClient.ServiceReference.WeathersCo.WeathersCoData data {
+        public TestChat.ServiceReference.WeathersCo.WeathersCoData data {
             get {
                 return this.dataField;
             }
@@ -320,10 +227,10 @@ namespace WCFServiceClient.ServiceReference {
         private string TextField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WCFServiceClient.ServiceReference.ChatMessageTypes TypeField;
+        private TestChat.ServiceReference.ChatMessageTypes TypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WCFServiceClient.ServiceReference.User UserField;
+        private TestChat.ServiceReference.User UserField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -349,7 +256,7 @@ namespace WCFServiceClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WCFServiceClient.ServiceReference.ChatMessageTypes Type {
+        public TestChat.ServiceReference.ChatMessageTypes Type {
             get {
                 return this.TypeField;
             }
@@ -362,7 +269,7 @@ namespace WCFServiceClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WCFServiceClient.ServiceReference.User User {
+        public TestChat.ServiceReference.User User {
             get {
                 return this.UserField;
             }
@@ -370,6 +277,99 @@ namespace WCFServiceClient.ServiceReference {
                 if ((object.ReferenceEquals(this.UserField, value) != true)) {
                     this.UserField = value;
                     this.RaisePropertyChanged("User");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/ServiceLibrary")]
+    [System.SerializableAttribute()]
+    public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> LastLoginField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PasswordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> LastLogin {
+            get {
+                return this.LastLoginField;
+            }
+            set {
+                if ((this.LastLoginField.Equals(value) != true)) {
+                    this.LastLoginField = value;
+                    this.RaisePropertyChanged("LastLogin");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Password {
+            get {
+                return this.PasswordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
+                    this.PasswordField = value;
+                    this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((this.UserIdField.Equals(value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
                 }
             }
         }
@@ -399,126 +399,23 @@ namespace WCFServiceClient.ServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IContractUser", SessionMode=System.ServiceModel.SessionMode.NotAllowed)]
-    public interface IContractUser {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/Authenticate", ReplyAction="http://tempuri.org/IContractUser/AuthenticateResponse")]
-        WCFServiceClient.ServiceReference.User Authenticate(string name, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/Authenticate", ReplyAction="http://tempuri.org/IContractUser/AuthenticateResponse")]
-        System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.User> AuthenticateAsync(string name, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/GetUser", ReplyAction="http://tempuri.org/IContractUser/GetUserResponse")]
-        WCFServiceClient.ServiceReference.User GetUser();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/GetUser", ReplyAction="http://tempuri.org/IContractUser/GetUserResponse")]
-        System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.User> GetUserAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/AddUser", ReplyAction="http://tempuri.org/IContractUser/AddUserResponse")]
-        WCFServiceClient.ServiceReference.User AddUser(string name, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/AddUser", ReplyAction="http://tempuri.org/IContractUser/AddUserResponse")]
-        System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.User> AddUserAsync(string name, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/DeleteUser", ReplyAction="http://tempuri.org/IContractUser/DeleteUserResponse")]
-        bool DeleteUser(WCFServiceClient.ServiceReference.User user);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/DeleteUser", ReplyAction="http://tempuri.org/IContractUser/DeleteUserResponse")]
-        System.Threading.Tasks.Task<bool> DeleteUserAsync(WCFServiceClient.ServiceReference.User user);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/UpdateUser", ReplyAction="http://tempuri.org/IContractUser/UpdateUserResponse")]
-        bool UpdateUser(WCFServiceClient.ServiceReference.User user);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractUser/UpdateUser", ReplyAction="http://tempuri.org/IContractUser/UpdateUserResponse")]
-        System.Threading.Tasks.Task<bool> UpdateUserAsync(WCFServiceClient.ServiceReference.User user);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IContractUserChannel : WCFServiceClient.ServiceReference.IContractUser, System.ServiceModel.IClientChannel {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ContractUserClient : System.ServiceModel.ClientBase<WCFServiceClient.ServiceReference.IContractUser>, WCFServiceClient.ServiceReference.IContractUser {
-        
-        public ContractUserClient() {
-        }
-        
-        public ContractUserClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
-        }
-        
-        public ContractUserClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public ContractUserClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public ContractUserClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
-        }
-        
-        public WCFServiceClient.ServiceReference.User Authenticate(string name, string password) {
-            return base.Channel.Authenticate(name, password);
-        }
-        
-        public System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.User> AuthenticateAsync(string name, string password) {
-            return base.Channel.AuthenticateAsync(name, password);
-        }
-        
-        public WCFServiceClient.ServiceReference.User GetUser() {
-            return base.Channel.GetUser();
-        }
-        
-        public System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.User> GetUserAsync() {
-            return base.Channel.GetUserAsync();
-        }
-        
-        public WCFServiceClient.ServiceReference.User AddUser(string name, string password) {
-            return base.Channel.AddUser(name, password);
-        }
-        
-        public System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.User> AddUserAsync(string name, string password) {
-            return base.Channel.AddUserAsync(name, password);
-        }
-        
-        public bool DeleteUser(WCFServiceClient.ServiceReference.User user) {
-            return base.Channel.DeleteUser(user);
-        }
-        
-        public System.Threading.Tasks.Task<bool> DeleteUserAsync(WCFServiceClient.ServiceReference.User user) {
-            return base.Channel.DeleteUserAsync(user);
-        }
-        
-        public bool UpdateUser(WCFServiceClient.ServiceReference.User user) {
-            return base.Channel.UpdateUser(user);
-        }
-        
-        public System.Threading.Tasks.Task<bool> UpdateUserAsync(WCFServiceClient.ServiceReference.User user) {
-            return base.Channel.UpdateUserAsync(user);
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IContractWeather")]
     public interface IContractWeather {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractWeather/GetWeather", ReplyAction="http://tempuri.org/IContractWeather/GetWeatherResponse")]
-        WCFServiceClient.ServiceReference.WeathersCo GetWeather(string city);
+        TestChat.ServiceReference.WeathersCo GetWeather(string city);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractWeather/GetWeather", ReplyAction="http://tempuri.org/IContractWeather/GetWeatherResponse")]
-        System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.WeathersCo> GetWeatherAsync(string city);
+        System.Threading.Tasks.Task<TestChat.ServiceReference.WeathersCo> GetWeatherAsync(string city);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IContractWeatherChannel : WCFServiceClient.ServiceReference.IContractWeather, System.ServiceModel.IClientChannel {
+    public interface IContractWeatherChannel : TestChat.ServiceReference.IContractWeather, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ContractWeatherClient : System.ServiceModel.ClientBase<WCFServiceClient.ServiceReference.IContractWeather>, WCFServiceClient.ServiceReference.IContractWeather {
+    public partial class ContractWeatherClient : System.ServiceModel.ClientBase<TestChat.ServiceReference.IContractWeather>, TestChat.ServiceReference.IContractWeather {
         
         public ContractWeatherClient() {
         }
@@ -539,11 +436,11 @@ namespace WCFServiceClient.ServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public WCFServiceClient.ServiceReference.WeathersCo GetWeather(string city) {
+        public TestChat.ServiceReference.WeathersCo GetWeather(string city) {
             return base.Channel.GetWeather(city);
         }
         
-        public System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.WeathersCo> GetWeatherAsync(string city) {
+        public System.Threading.Tasks.Task<TestChat.ServiceReference.WeathersCo> GetWeatherAsync(string city) {
             return base.Channel.GetWeatherAsync(city);
         }
     }
@@ -553,10 +450,10 @@ namespace WCFServiceClient.ServiceReference {
     public interface IContractChat {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/GetMessages", ReplyAction="http://tempuri.org/IContractChat/GetMessagesResponse")]
-        WCFServiceClient.ServiceReference.ChatMessage[] GetMessages();
+        TestChat.ServiceReference.ChatMessage[] GetMessages();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/GetMessages", ReplyAction="http://tempuri.org/IContractChat/GetMessagesResponse")]
-        System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.ChatMessage[]> GetMessagesAsync();
+        System.Threading.Tasks.Task<TestChat.ServiceReference.ChatMessage[]> GetMessagesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/PushMessage", ReplyAction="http://tempuri.org/IContractChat/PushMessageResponse")]
         void PushMessage(string message);
@@ -575,15 +472,45 @@ namespace WCFServiceClient.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/LogOut", ReplyAction="http://tempuri.org/IContractChat/LogOutResponse")]
         System.Threading.Tasks.Task<bool> LogOutAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/Authenticate", ReplyAction="http://tempuri.org/IContractChat/AuthenticateResponse")]
+        TestChat.ServiceReference.User Authenticate(string name, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/Authenticate", ReplyAction="http://tempuri.org/IContractChat/AuthenticateResponse")]
+        System.Threading.Tasks.Task<TestChat.ServiceReference.User> AuthenticateAsync(string name, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/GetUser", ReplyAction="http://tempuri.org/IContractChat/GetUserResponse")]
+        TestChat.ServiceReference.User GetUser();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/GetUser", ReplyAction="http://tempuri.org/IContractChat/GetUserResponse")]
+        System.Threading.Tasks.Task<TestChat.ServiceReference.User> GetUserAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/AddUser", ReplyAction="http://tempuri.org/IContractChat/AddUserResponse")]
+        TestChat.ServiceReference.User AddUser(string name, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/AddUser", ReplyAction="http://tempuri.org/IContractChat/AddUserResponse")]
+        System.Threading.Tasks.Task<TestChat.ServiceReference.User> AddUserAsync(string name, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/DeleteUser", ReplyAction="http://tempuri.org/IContractChat/DeleteUserResponse")]
+        bool DeleteUser(TestChat.ServiceReference.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/DeleteUser", ReplyAction="http://tempuri.org/IContractChat/DeleteUserResponse")]
+        System.Threading.Tasks.Task<bool> DeleteUserAsync(TestChat.ServiceReference.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/UpdateUser", ReplyAction="http://tempuri.org/IContractChat/UpdateUserResponse")]
+        bool UpdateUser(TestChat.ServiceReference.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/UpdateUser", ReplyAction="http://tempuri.org/IContractChat/UpdateUserResponse")]
+        System.Threading.Tasks.Task<bool> UpdateUserAsync(TestChat.ServiceReference.User user);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IContractChatChannel : WCFServiceClient.ServiceReference.IContractChat, System.ServiceModel.IClientChannel {
+    public interface IContractChatChannel : TestChat.ServiceReference.IContractChat, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ContractChatClient : System.ServiceModel.ClientBase<WCFServiceClient.ServiceReference.IContractChat>, WCFServiceClient.ServiceReference.IContractChat {
+    public partial class ContractChatClient : System.ServiceModel.ClientBase<TestChat.ServiceReference.IContractChat>, TestChat.ServiceReference.IContractChat {
         
         public ContractChatClient() {
         }
@@ -604,11 +531,11 @@ namespace WCFServiceClient.ServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public WCFServiceClient.ServiceReference.ChatMessage[] GetMessages() {
+        public TestChat.ServiceReference.ChatMessage[] GetMessages() {
             return base.Channel.GetMessages();
         }
         
-        public System.Threading.Tasks.Task<WCFServiceClient.ServiceReference.ChatMessage[]> GetMessagesAsync() {
+        public System.Threading.Tasks.Task<TestChat.ServiceReference.ChatMessage[]> GetMessagesAsync() {
             return base.Channel.GetMessagesAsync();
         }
         
@@ -634,6 +561,46 @@ namespace WCFServiceClient.ServiceReference {
         
         public System.Threading.Tasks.Task<bool> LogOutAsync() {
             return base.Channel.LogOutAsync();
+        }
+        
+        public TestChat.ServiceReference.User Authenticate(string name, string password) {
+            return base.Channel.Authenticate(name, password);
+        }
+        
+        public System.Threading.Tasks.Task<TestChat.ServiceReference.User> AuthenticateAsync(string name, string password) {
+            return base.Channel.AuthenticateAsync(name, password);
+        }
+        
+        public TestChat.ServiceReference.User GetUser() {
+            return base.Channel.GetUser();
+        }
+        
+        public System.Threading.Tasks.Task<TestChat.ServiceReference.User> GetUserAsync() {
+            return base.Channel.GetUserAsync();
+        }
+        
+        public TestChat.ServiceReference.User AddUser(string name, string password) {
+            return base.Channel.AddUser(name, password);
+        }
+        
+        public System.Threading.Tasks.Task<TestChat.ServiceReference.User> AddUserAsync(string name, string password) {
+            return base.Channel.AddUserAsync(name, password);
+        }
+        
+        public bool DeleteUser(TestChat.ServiceReference.User user) {
+            return base.Channel.DeleteUser(user);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteUserAsync(TestChat.ServiceReference.User user) {
+            return base.Channel.DeleteUserAsync(user);
+        }
+        
+        public bool UpdateUser(TestChat.ServiceReference.User user) {
+            return base.Channel.UpdateUser(user);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateUserAsync(TestChat.ServiceReference.User user) {
+            return base.Channel.UpdateUserAsync(user);
         }
     }
 }
