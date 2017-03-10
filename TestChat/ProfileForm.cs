@@ -11,24 +11,26 @@ using TestChat.ServiceReference;
 
 namespace TestChat
 {
-    public partial class ChangeProfileForm : Form
+    public partial class ProfileForm : Form
     {
-        public enum Results { Apply, Cancel }
+        public enum Results { Ok, Cancel }
         public User User { get; private set; }
         public Results Result { get; private set; }
-        public ChangeProfileForm(User user)
+        public ProfileForm(User user)
         {
             this.InitializeComponent();
             this.User = user;
             this.textBoxLogin.Text = user.Name;
             this.textBoxPassword.Text = user.Password;
+            this.textBoxGroup.Text = user.Group;
         }
 
         private void buttonApply_Click(object sender, EventArgs e)
         {
-            this.Result = Results.Apply;
+            this.Result = Results.Ok;
             this.User.Name = this.textBoxLogin.Text.Trim();
             this.User.Password = this.textBoxPassword.Text.Trim();
+            this.User.Group = this.textBoxGroup.Text.Trim();
             this.Close();
         }
 

@@ -27,14 +27,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="PushMessage">
+  <xs:element name="PostMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ServiceLibrary" minOccurs="0" name="message" nillable="true" type="q3:ChatMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="PushMessageResponse">
+  <xs:element name="PostMessageResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -66,21 +66,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="Authenticate">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AuthenticateResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ServiceLibrary" minOccurs="0" name="AuthenticateResult" nillable="true" type="q3:User" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="GetUser">
     <xs:complexType>
       <xs:sequence />
@@ -96,15 +81,14 @@
   <xs:element name="AddUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ServiceLibrary" minOccurs="0" name="user" nillable="true" type="q5:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ServiceLibrary" minOccurs="0" name="AddUserResult" nillable="true" type="q5:User" />
+        <xs:element minOccurs="0" name="AddUserResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

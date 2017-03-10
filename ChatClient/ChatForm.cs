@@ -13,11 +13,7 @@ namespace ChatClient
 {
     public partial class ChatForm : Form
     {
-        struct ChatMessageTypes
-        {
-            public const string NewMessages = "new_messages";
-            public const string ServiceTotal = "service_total";
-        }
+        public enum ChatMessageTypes { Posting, Service }
         private ContractChatClient ChatClient { get; set; }
         protected const int PollingInterval = 3000;
         private Timer PollingTimer { get; set; }
@@ -29,6 +25,7 @@ namespace ChatClient
             this.PollingTimer = new Timer();
             this.PollingTimer.Tick += this.PollingEventHandler;
             this.PollingTimer.Interval = ChatForm.PollingInterval;
+            this.PollingTimer.Start();
         }
         ~ChatForm()
         {
@@ -58,9 +55,9 @@ namespace ChatClient
         {
             foreach(ChatMessage message in messages)
             {
-                if (message.Type == ChatForm.ChatMessageTypes.ServiceTotal)
+                if (message.Type == ChatForm.ChatMessageTypes.Service.ToString())
                     this.labelTotaDigit.Text = message.Text;
-                if (message.Type == ChatForm.ChatMessageTypes.NewMessages)
+                if (message.Type == ChatForm.ChatMessageTypes.Posting.ToString())
                     this.listViewChat.Items.Add(new ListViewItem(new String[] { message.User.Name, DateTime.Now.ToShortDateString(), message.Text }));
             }
         }
@@ -71,11 +68,6 @@ namespace ChatClient
             this.LoggedIn = loginForm.LoggedIn;
             if (this.LoggedIn)
                 this.labelStatusValue.Text = "Logged in";
-        }
-
-        private void ChatForm_Load(object sender, EventArgs e)
-        {
-            this.PollingTimer.Start();
         }
 
         private void buttonPost_Click(object sender, EventArgs e)

@@ -41,11 +41,11 @@
   <wsdl:message name="IContractChat_GetMessages_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetMessagesResponse" />
   </wsdl:message>
-  <wsdl:message name="IContractChat_PushMessage_InputMessage">
-    <wsdl:part name="parameters" element="tns:PushMessage" />
+  <wsdl:message name="IContractChat_PostMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:PostMessage" />
   </wsdl:message>
-  <wsdl:message name="IContractChat_PushMessage_OutputMessage">
-    <wsdl:part name="parameters" element="tns:PushMessageResponse" />
+  <wsdl:message name="IContractChat_PostMessage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PostMessageResponse" />
   </wsdl:message>
   <wsdl:message name="IContractChat_LogIn_InputMessage">
     <wsdl:part name="parameters" element="tns:LogIn" />
@@ -58,12 +58,6 @@
   </wsdl:message>
   <wsdl:message name="IContractChat_LogOut_OutputMessage">
     <wsdl:part name="parameters" element="tns:LogOutResponse" />
-  </wsdl:message>
-  <wsdl:message name="IContractChat_Authenticate_InputMessage">
-    <wsdl:part name="parameters" element="tns:Authenticate" />
-  </wsdl:message>
-  <wsdl:message name="IContractChat_Authenticate_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AuthenticateResponse" />
   </wsdl:message>
   <wsdl:message name="IContractChat_GetUser_InputMessage">
     <wsdl:part name="parameters" element="tns:GetUser" />
@@ -100,9 +94,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IContractChat/GetMessages" message="tns:IContractChat_GetMessages_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IContractChat/GetMessagesResponse" message="tns:IContractChat_GetMessages_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PushMessage">
-      <wsdl:input wsaw:Action="http://tempuri.org/IContractChat/PushMessage" message="tns:IContractChat_PushMessage_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IContractChat/PushMessageResponse" message="tns:IContractChat_PushMessage_OutputMessage" />
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PostMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IContractChat/PostMessage" message="tns:IContractChat_PostMessage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IContractChat/PostMessageResponse" message="tns:IContractChat_PostMessage_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="LogIn">
       <wsdl:input wsaw:Action="http://tempuri.org/IContractChat/LogIn" message="tns:IContractChat_LogIn_InputMessage" />
@@ -111,10 +105,6 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="LogOut">
       <wsdl:input wsaw:Action="http://tempuri.org/IContractChat/LogOut" message="tns:IContractChat_LogOut_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IContractChat/LogOutResponse" message="tns:IContractChat_LogOut_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Authenticate">
-      <wsdl:input wsaw:Action="http://tempuri.org/IContractChat/Authenticate" message="tns:IContractChat_Authenticate_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IContractChat/AuthenticateResponse" message="tns:IContractChat_Authenticate_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IContractChat/GetUser" message="tns:IContractChat_GetUser_InputMessage" />
@@ -158,8 +148,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PushMessage">
-      <soap12:operation soapAction="http://tempuri.org/IContractChat/PushMessage" style="document" />
+    <wsdl:operation name="PostMessage">
+      <soap12:operation soapAction="http://tempuri.org/IContractChat/PostMessage" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -178,15 +168,6 @@
     </wsdl:operation>
     <wsdl:operation name="LogOut">
       <soap12:operation soapAction="http://tempuri.org/IContractChat/LogOut" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="Authenticate">
-      <soap12:operation soapAction="http://tempuri.org/IContractChat/Authenticate" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

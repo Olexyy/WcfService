@@ -40,14 +40,17 @@ namespace TestChat
         {
             try
             {
-                if(this.ChatClient.AddUser(this.textBoxLogin.Text.Trim(), this.textBoxPassword.Text.Trim()) != null)
-                    MessageBox.Show("User added, please login.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                else
-                     MessageBox.Show("Use different login name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var profileForm = new ProfileForm(new User());
+                profileForm.ShowDialog();
+                if (profileForm.Result == ProfileForm.Results.Ok)
+                    if(this.ChatClient.AddUser(profileForm.User))
+                        MessageBox.Show("User added, please login.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                        MessageBox.Show("Use different credentials.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-}
+        }
     }
 }

@@ -34,7 +34,7 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonLogin = new System.Windows.Forms.Button();
             this.ButtonLogout = new System.Windows.Forms.Button();
-            this.buttonPost = new System.Windows.Forms.Button();
+            this.buttonPostAll = new System.Windows.Forms.Button();
             this.labelTotalText = new System.Windows.Forms.Label();
             this.labelTotalCount = new System.Windows.Forms.Label();
             this.textBoxMessage = new System.Windows.Forms.TextBox();
@@ -43,10 +43,15 @@
             this.labelRegistered = new System.Windows.Forms.Label();
             this.labelRegisteredCount = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelGroupValue = new System.Windows.Forms.Label();
+            this.labelGroupText = new System.Windows.Forms.Label();
+            this.labelInGroupCount = new System.Windows.Forms.Label();
+            this.labelGroup = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.buttonProfie = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.buttonClear = new System.Windows.Forms.Button();
+            this.buttonPostGroup = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -62,7 +67,7 @@
             this.columnHeader3});
             this.listViewChat.Location = new System.Drawing.Point(6, 19);
             this.listViewChat.Name = "listViewChat";
-            this.listViewChat.Size = new System.Drawing.Size(371, 180);
+            this.listViewChat.Size = new System.Drawing.Size(371, 215);
             this.listViewChat.TabIndex = 0;
             this.listViewChat.UseCompatibleStateImageBehavior = false;
             this.listViewChat.View = System.Windows.Forms.View.Details;
@@ -101,15 +106,15 @@
             this.ButtonLogout.UseVisualStyleBackColor = true;
             this.ButtonLogout.Click += new System.EventHandler(this.ButtonLogout_Click);
             // 
-            // buttonPost
+            // buttonPostAll
             // 
-            this.buttonPost.Location = new System.Drawing.Point(392, 19);
-            this.buttonPost.Name = "buttonPost";
-            this.buttonPost.Size = new System.Drawing.Size(107, 23);
-            this.buttonPost.TabIndex = 3;
-            this.buttonPost.Text = "Post";
-            this.buttonPost.UseVisualStyleBackColor = true;
-            this.buttonPost.Click += new System.EventHandler(this.buttonPost_Click);
+            this.buttonPostAll.Location = new System.Drawing.Point(392, 19);
+            this.buttonPostAll.Name = "buttonPostAll";
+            this.buttonPostAll.Size = new System.Drawing.Size(107, 23);
+            this.buttonPostAll.TabIndex = 3;
+            this.buttonPostAll.Text = "Post all";
+            this.buttonPostAll.UseVisualStyleBackColor = true;
+            this.buttonPostAll.Click += new System.EventHandler(this.buttonPostAll_Click);
             // 
             // labelTotalText
             // 
@@ -123,7 +128,7 @@
             // labelTotalCount
             // 
             this.labelTotalCount.AutoSize = true;
-            this.labelTotalCount.Location = new System.Drawing.Point(87, 17);
+            this.labelTotalCount.Location = new System.Drawing.Point(79, 16);
             this.labelTotalCount.Name = "labelTotalCount";
             this.labelTotalCount.Size = new System.Drawing.Size(13, 13);
             this.labelTotalCount.TabIndex = 5;
@@ -134,7 +139,7 @@
             this.textBoxMessage.Location = new System.Drawing.Point(6, 19);
             this.textBoxMessage.Multiline = true;
             this.textBoxMessage.Name = "textBoxMessage";
-            this.textBoxMessage.Size = new System.Drawing.Size(371, 54);
+            this.textBoxMessage.Size = new System.Drawing.Size(371, 83);
             this.textBoxMessage.TabIndex = 6;
             // 
             // labelStatusText
@@ -149,7 +154,7 @@
             // labelStatusValue
             // 
             this.labelStatusValue.AutoSize = true;
-            this.labelStatusValue.Location = new System.Drawing.Point(87, 52);
+            this.labelStatusValue.Location = new System.Drawing.Point(79, 70);
             this.labelStatusValue.Name = "labelStatusValue";
             this.labelStatusValue.Size = new System.Drawing.Size(21, 13);
             this.labelStatusValue.TabIndex = 8;
@@ -158,7 +163,7 @@
             // labelRegistered
             // 
             this.labelRegistered.AutoSize = true;
-            this.labelRegistered.Location = new System.Drawing.Point(16, 52);
+            this.labelRegistered.Location = new System.Drawing.Point(16, 70);
             this.labelRegistered.Name = "labelRegistered";
             this.labelRegistered.Size = new System.Drawing.Size(57, 13);
             this.labelRegistered.TabIndex = 9;
@@ -167,7 +172,7 @@
             // labelRegisteredCount
             // 
             this.labelRegisteredCount.AutoSize = true;
-            this.labelRegisteredCount.Location = new System.Drawing.Point(87, 34);
+            this.labelRegisteredCount.Location = new System.Drawing.Point(79, 34);
             this.labelRegisteredCount.Name = "labelRegisteredCount";
             this.labelRegisteredCount.Size = new System.Drawing.Size(13, 13);
             this.labelRegisteredCount.TabIndex = 10;
@@ -175,6 +180,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.labelGroupValue);
+            this.groupBox1.Controls.Add(this.labelGroupText);
+            this.groupBox1.Controls.Add(this.labelInGroupCount);
+            this.groupBox1.Controls.Add(this.labelGroup);
             this.groupBox1.Controls.Add(this.labelStatusText);
             this.groupBox1.Controls.Add(this.labelTotalCount);
             this.groupBox1.Controls.Add(this.labelRegisteredCount);
@@ -183,18 +192,54 @@
             this.groupBox1.Controls.Add(this.labelTotalText);
             this.groupBox1.Location = new System.Drawing.Point(383, 11);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(125, 79);
+            this.groupBox1.Size = new System.Drawing.Size(125, 110);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
+            // 
+            // labelGroupValue
+            // 
+            this.labelGroupValue.AutoSize = true;
+            this.labelGroupValue.Location = new System.Drawing.Point(79, 90);
+            this.labelGroupValue.Name = "labelGroupValue";
+            this.labelGroupValue.Size = new System.Drawing.Size(33, 13);
+            this.labelGroupValue.TabIndex = 14;
+            this.labelGroupValue.Text = "None";
+            // 
+            // labelGroupText
+            // 
+            this.labelGroupText.AutoSize = true;
+            this.labelGroupText.Location = new System.Drawing.Point(16, 90);
+            this.labelGroupText.Name = "labelGroupText";
+            this.labelGroupText.Size = new System.Drawing.Size(39, 13);
+            this.labelGroupText.TabIndex = 13;
+            this.labelGroupText.Text = "Group:";
+            // 
+            // labelInGroupCount
+            // 
+            this.labelInGroupCount.AutoSize = true;
+            this.labelInGroupCount.Location = new System.Drawing.Point(79, 52);
+            this.labelInGroupCount.Name = "labelInGroupCount";
+            this.labelInGroupCount.Size = new System.Drawing.Size(13, 13);
+            this.labelInGroupCount.TabIndex = 12;
+            this.labelInGroupCount.Text = "0";
+            // 
+            // labelGroup
+            // 
+            this.labelGroup.AutoSize = true;
+            this.labelGroup.Location = new System.Drawing.Point(16, 52);
+            this.labelGroup.Name = "labelGroup";
+            this.labelGroup.Size = new System.Drawing.Size(49, 13);
+            this.labelGroup.TabIndex = 11;
+            this.labelGroup.Text = "In group:";
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.buttonProfie);
             this.groupBox2.Controls.Add(this.buttonLogin);
             this.groupBox2.Controls.Add(this.ButtonLogout);
-            this.groupBox2.Location = new System.Drawing.Point(383, 91);
+            this.groupBox2.Location = new System.Drawing.Point(383, 123);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(125, 108);
+            this.groupBox2.Size = new System.Drawing.Size(125, 111);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             // 
@@ -211,23 +256,34 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.buttonClear);
+            this.groupBox3.Controls.Add(this.buttonPostGroup);
             this.groupBox3.Controls.Add(this.textBoxMessage);
-            this.groupBox3.Controls.Add(this.buttonPost);
-            this.groupBox3.Location = new System.Drawing.Point(12, 212);
+            this.groupBox3.Controls.Add(this.buttonPostAll);
+            this.groupBox3.Location = new System.Drawing.Point(12, 258);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(515, 87);
+            this.groupBox3.Size = new System.Drawing.Size(515, 115);
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(392, 50);
+            this.buttonClear.Location = new System.Drawing.Point(392, 79);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(107, 23);
-            this.buttonClear.TabIndex = 7;
+            this.buttonClear.TabIndex = 8;
             this.buttonClear.Text = "Clear";
             this.buttonClear.UseVisualStyleBackColor = true;
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
+            // 
+            // buttonPostGroup
+            // 
+            this.buttonPostGroup.Location = new System.Drawing.Point(392, 50);
+            this.buttonPostGroup.Name = "buttonPostGroup";
+            this.buttonPostGroup.Size = new System.Drawing.Size(107, 23);
+            this.buttonPostGroup.TabIndex = 7;
+            this.buttonPostGroup.Text = "Post group";
+            this.buttonPostGroup.UseVisualStyleBackColor = true;
+            this.buttonPostGroup.Click += new System.EventHandler(this.buttonPostGroup_Click);
             // 
             // groupBox4
             // 
@@ -236,7 +292,7 @@
             this.groupBox4.Controls.Add(this.groupBox2);
             this.groupBox4.Location = new System.Drawing.Point(12, 1);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(515, 211);
+            this.groupBox4.Size = new System.Drawing.Size(515, 251);
             this.groupBox4.TabIndex = 14;
             this.groupBox4.TabStop = false;
             // 
@@ -244,7 +300,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(537, 306);
+            this.ClientSize = new System.Drawing.Size(537, 385);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox4);
             this.Name = "ChatForm";
@@ -269,7 +325,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.Button ButtonLogout;
-        private System.Windows.Forms.Button buttonPost;
+        private System.Windows.Forms.Button buttonPostAll;
         private System.Windows.Forms.Label labelTotalText;
         private System.Windows.Forms.Label labelTotalCount;
         private System.Windows.Forms.TextBox textBoxMessage;
@@ -280,8 +336,13 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button buttonClear;
+        private System.Windows.Forms.Button buttonPostGroup;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button buttonProfie;
+        private System.Windows.Forms.Label labelGroup;
+        private System.Windows.Forms.Label labelInGroupCount;
+        private System.Windows.Forms.Label labelGroupText;
+        private System.Windows.Forms.Label labelGroupValue;
+        private System.Windows.Forms.Button buttonClear;
     }
 }

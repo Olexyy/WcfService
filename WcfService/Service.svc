@@ -9,19 +9,85 @@ using System.IO;
 using System.Data.Entity;
 using System.Runtime.Serialization;
 using System.Collections.Generic;
-
+using System.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 namespace ServiceLibrary
 {
+    public class SessionManager
+    {
+        public enum SessionManagerEvents { SessionStart, SessionEnd, Login, Logout };
+        public const string All = "All";
+        private static Dictionary<string, ObservableCollection<Service>> Sessions { get; set; }
+        static SessionManager()
+        {
+            SessionManager.Sessions = new Dictionary<string, ObservableCollection<Service>>();
+            AddSessionCollection(SessionManager.All);
+        }
+        private static void SessionEventHandler(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            var sessions = sender as ObservableCollection<Service>;
+            string key = SessionManager.Sessions.Where(i => i.Value == sessions).Select(i => i.Key).FirstOrDefault();
+            // Main collection: session start or end
+            if (key == SessionManager.All)
+                SessionManager.Sessions[SessionManager.All].ToList().ForEach(i => i.AnnounceSelf(SessionManager.CountTotal().ToString(), ChatMessageTypes.GroupTotal));
+            // Not main collection: login, logout (notify all about registered and group about group)
+            else
+            {
+                string countRegistered = SessionManager.CountRegistered().ToString();
+                sessions.ToList().ForEach(i => i.AnnounceSelf(sessions.Count.ToString(), ChatMessageTypes.GroupTotal));
+                SessionManager.Sessions[SessionManager.All].ToList().ForEach(i => i.AnnounceSelf(countRegistered, ChatMessageTypes.GroupTotal));
+                //SessionManager.Sessions.Where(i => i.Key != SessionManager.All).ToList().ForEach(j => j.Value.ToList().ForEach(y => y.AnnounceSelf(countRegistered, ChatMessageTypes.GroupTotal)));
+            }
+        }
+        private static void AddSessionCollection(string name)
+        {
+            Sessions.Add(name, new ObservableCollection<Service>());
+            Sessions[name].CollectionChanged += SessionManager.SessionEventHandler;
+        }
+        public static void Update(SessionManagerEvents sessionEvent, Service session)
+        {
+            switch (sessionEvent)
+            {
+                case SessionManagerEvents.SessionStart:
+                    SessionManager.Sessions[SessionManager.All].Add(session);
+                    break;
+                case SessionManagerEvents.SessionEnd:
+                    SessionManager.Sessions[SessionManager.All].Remove(session);
+                    break;
+                case SessionManagerEvents.Login:
+                    string key = session.User.Group;
+                    if (!SessionManager.Sessions.ContainsKey(key))
+                        SessionManager.AddSessionCollection(key);
+                    SessionManager.Sessions[key].Add(session);
+                    break;
+                case SessionManagerEvents.Logout:
+                    SessionManager.Sessions[session.User.Group].Remove(session);
+                    break;
+                default: break;
+            }
+        }
+        private static int CountTotal()
+        {
+            return SessionManager.Sessions[SessionManager.All].Count;
+        }
+        private static int CountRegistered()
+        {
+            return SessionManager.Sessions.Where(i=>i.Key != SessionManager.All).ToList().Sum(i => i.Value.Count);
+        }
+    }
+
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession, ConcurrencyMode = ConcurrencyMode.Single)]
     public class Service : IContractChat, IContractWeather
     {
+
         private static List<Service> Services { get; set; }
 
         private static List<Service> Users { get { return Service.Services.Where(i => i.User != null).ToList(); } }
 
         private List<ChatMessage> Messages { get; set; }
 
-        private User User { get; set; }
+        public User User { get; set; }
 
         static Service()
         {
@@ -35,7 +101,24 @@ namespace ServiceLibrary
             OperationContext.Current.InstanceContext.Closing += this.ServiceSessionClosed;
             Service.Services.Add(this);
             this.AnnounceAll(Service.Services.Count.ToString(), ChatMessageTypes.UsersTotal);
-            this.Messages.Add(new ChatMessage() { Text = Service.Users.Count.ToString(), User = null, Type = ChatMessageTypes.UsersRegistered });
+            this.AnnounceGroup(this.Group().Count.ToString(), ChatMessageTypes.GroupTotal);
+            this.AnnounceSelf(Service.Users.Count.ToString(),  ChatMessageTypes.UsersRegistered);
+        }
+        private List<Service> Group()
+        {
+            if (this.User == null)
+                return new List<Service>();
+            else
+                return Service.Users.Where(i => i.User.Group == this.User.Group).ToList();
+        }
+        public void AnnounceSelf(string text, ChatMessageTypes type, User user = null)
+        {
+            this.Messages.Add(new ChatMessage() { Text = text, User = user, Type = type });
+        }
+        private void AnnounceGroup(string text, ChatMessageTypes type, User user = null)
+        {
+            foreach(Service service in this.Group())
+                service.Messages.Add(new ChatMessage() { Text = text, User = user, Type = type });
         }
         private void AnnounceUsers(string text, ChatMessageTypes type, User user = null)
         {
@@ -51,10 +134,15 @@ namespace ServiceLibrary
         {
             Service.Services.Remove(this);
             this.AnnounceAll(Service.Services.Count.ToString(), ChatMessageTypes.UsersTotal);
+            this.AnnounceAll(Service.Users.Count.ToString(), ChatMessageTypes.UsersRegistered);
+            this.AnnounceGroup(this.Group().Count.ToString(), ChatMessageTypes.GroupTotal);
         }
-        public void PushMessage(string message)
+        public void PostMessage(ChatMessage message)
         {
-            this.AnnounceUsers(message, ChatMessageTypes.Posting, this.User);
+            if (message.Type == ChatMessageTypes.PostAll)
+                this.AnnounceUsers(message.Text, message.Type, this.User);
+            else if (message.Type == ChatMessageTypes.PostGroup)
+                this.AnnounceGroup(message.Text, message.Type, this.User);
         }
         public List<ChatMessage> GetMessages()
         {
@@ -64,6 +152,8 @@ namespace ServiceLibrary
         }
         public bool LogIn(string name, string password)
         {
+            if((Service.Users.Where(i => i.User.Name == name)).ToList().Count > 0)
+                return false;
             using (DBContext DB = new DBContext())
             {
                 var result = DB.Users.Where(i => i.Name == name && i.Password == password).ToList();
@@ -74,6 +164,8 @@ namespace ServiceLibrary
                     this.UpdateUser(user);
                     this.User = user;
                     this.AnnounceAll(Service.Users.Count.ToString(), ChatMessageTypes.UsersRegistered);
+                    this.AnnounceGroup(this.Group().Count.ToString(), ChatMessageTypes.GroupTotal);
+                    this.AnnounceSelf(String.Empty, ChatMessageTypes.UserDetails, this.User);
                     return true;
                 }
                 return false;
@@ -87,23 +179,9 @@ namespace ServiceLibrary
             {
                 this.User = null;
                 this.AnnounceAll(Service.Users.Count.ToString(), ChatMessageTypes.UsersRegistered);
+                this.AnnounceGroup(this.Group().Count.ToString(), ChatMessageTypes.GroupTotal);
+                this.AnnounceSelf(String.Empty, ChatMessageTypes.UserDetails, this.User);
                 return true;
-            }
-        }
-        public User Authenticate(string name, string password)
-        {
-            using (DBContext DB = new DBContext())
-            {
-                var result = DB.Users.Where(i => i.Name == name && i.Password == password).ToList();
-                if (result.Count > 0)
-                {
-                    var user = result.First();
-                    user.LastLogin = DateTime.Now;
-                    this.UpdateUser(user);
-                    this.User = user;
-                    return user;
-                }
-                return null;
             }
         }
         public User GetUser()
@@ -112,22 +190,19 @@ namespace ServiceLibrary
                 return this.User;
             return null;
         }
-        public User AddUser(string name, string password)
+        public bool AddUser(User user)
         {
             using (DBContext DB = new DBContext())
             {
                 try
                 {
-                    User user = new User();
-                    user.Name = name;
-                    user.Password = password;
                     DB.Users.Add(user);
                     DB.SaveChanges();
-                    return user;
+                    return true;
                 }
-                catch (Exception ex)
+                catch
                 {
-                    return null;
+                    return false;
                 }
             }
         }
@@ -140,9 +215,12 @@ namespace ServiceLibrary
                     DB.Entry(user).State = EntityState.Modified;
                     DB.SaveChanges();
                     this.User = user;
+                    //Changes take effect on next login 
+                    //this.AnnounceGroup(this.Group().Count.ToString(), ChatMessageTypes.GroupTotal);
+                    this.AnnounceSelf(String.Empty, ChatMessageTypes.UserDetails, this.User);
                     return true;
                 }
-                catch (Exception e)
+                catch
                 {
                     return false;
                 }
@@ -159,7 +237,7 @@ namespace ServiceLibrary
                     this.User = null;
                     return true;
                 }
-                catch (Exception e)
+                catch
                 {
                     return false;
                 }

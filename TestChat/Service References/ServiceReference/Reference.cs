@@ -301,6 +301,9 @@ namespace TestChat.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GroupField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.DateTime> LastLoginField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -319,6 +322,19 @@ namespace TestChat.ServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Group {
+            get {
+                return this.GroupField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GroupField, value) != true)) {
+                    this.GroupField = value;
+                    this.RaisePropertyChanged("Group");
+                }
             }
         }
         
@@ -389,13 +405,22 @@ namespace TestChat.ServiceReference {
     public enum ChatMessageTypes : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Posting = 0,
+        PostAll = 0,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        UsersTotal = 1,
+        PostGroup = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        UsersRegistered = 2,
+        GroupTotal = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UsersTotal = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UsersRegistered = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UserDetails = 5,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -455,11 +480,11 @@ namespace TestChat.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/GetMessages", ReplyAction="http://tempuri.org/IContractChat/GetMessagesResponse")]
         System.Threading.Tasks.Task<TestChat.ServiceReference.ChatMessage[]> GetMessagesAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/PushMessage", ReplyAction="http://tempuri.org/IContractChat/PushMessageResponse")]
-        void PushMessage(string message);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/PostMessage", ReplyAction="http://tempuri.org/IContractChat/PostMessageResponse")]
+        void PostMessage(TestChat.ServiceReference.ChatMessage message);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/PushMessage", ReplyAction="http://tempuri.org/IContractChat/PushMessageResponse")]
-        System.Threading.Tasks.Task PushMessageAsync(string message);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/PostMessage", ReplyAction="http://tempuri.org/IContractChat/PostMessageResponse")]
+        System.Threading.Tasks.Task PostMessageAsync(TestChat.ServiceReference.ChatMessage message);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/LogIn", ReplyAction="http://tempuri.org/IContractChat/LogInResponse")]
         bool LogIn(string name, string password);
@@ -473,12 +498,6 @@ namespace TestChat.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/LogOut", ReplyAction="http://tempuri.org/IContractChat/LogOutResponse")]
         System.Threading.Tasks.Task<bool> LogOutAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/Authenticate", ReplyAction="http://tempuri.org/IContractChat/AuthenticateResponse")]
-        TestChat.ServiceReference.User Authenticate(string name, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/Authenticate", ReplyAction="http://tempuri.org/IContractChat/AuthenticateResponse")]
-        System.Threading.Tasks.Task<TestChat.ServiceReference.User> AuthenticateAsync(string name, string password);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/GetUser", ReplyAction="http://tempuri.org/IContractChat/GetUserResponse")]
         TestChat.ServiceReference.User GetUser();
         
@@ -486,10 +505,10 @@ namespace TestChat.ServiceReference {
         System.Threading.Tasks.Task<TestChat.ServiceReference.User> GetUserAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/AddUser", ReplyAction="http://tempuri.org/IContractChat/AddUserResponse")]
-        TestChat.ServiceReference.User AddUser(string name, string password);
+        bool AddUser(TestChat.ServiceReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/AddUser", ReplyAction="http://tempuri.org/IContractChat/AddUserResponse")]
-        System.Threading.Tasks.Task<TestChat.ServiceReference.User> AddUserAsync(string name, string password);
+        System.Threading.Tasks.Task<bool> AddUserAsync(TestChat.ServiceReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/DeleteUser", ReplyAction="http://tempuri.org/IContractChat/DeleteUserResponse")]
         bool DeleteUser(TestChat.ServiceReference.User user);
@@ -539,12 +558,12 @@ namespace TestChat.ServiceReference {
             return base.Channel.GetMessagesAsync();
         }
         
-        public void PushMessage(string message) {
-            base.Channel.PushMessage(message);
+        public void PostMessage(TestChat.ServiceReference.ChatMessage message) {
+            base.Channel.PostMessage(message);
         }
         
-        public System.Threading.Tasks.Task PushMessageAsync(string message) {
-            return base.Channel.PushMessageAsync(message);
+        public System.Threading.Tasks.Task PostMessageAsync(TestChat.ServiceReference.ChatMessage message) {
+            return base.Channel.PostMessageAsync(message);
         }
         
         public bool LogIn(string name, string password) {
@@ -563,14 +582,6 @@ namespace TestChat.ServiceReference {
             return base.Channel.LogOutAsync();
         }
         
-        public TestChat.ServiceReference.User Authenticate(string name, string password) {
-            return base.Channel.Authenticate(name, password);
-        }
-        
-        public System.Threading.Tasks.Task<TestChat.ServiceReference.User> AuthenticateAsync(string name, string password) {
-            return base.Channel.AuthenticateAsync(name, password);
-        }
-        
         public TestChat.ServiceReference.User GetUser() {
             return base.Channel.GetUser();
         }
@@ -579,12 +590,12 @@ namespace TestChat.ServiceReference {
             return base.Channel.GetUserAsync();
         }
         
-        public TestChat.ServiceReference.User AddUser(string name, string password) {
-            return base.Channel.AddUser(name, password);
+        public bool AddUser(TestChat.ServiceReference.User user) {
+            return base.Channel.AddUser(user);
         }
         
-        public System.Threading.Tasks.Task<TestChat.ServiceReference.User> AddUserAsync(string name, string password) {
-            return base.Channel.AddUserAsync(name, password);
+        public System.Threading.Tasks.Task<bool> AddUserAsync(TestChat.ServiceReference.User user) {
+            return base.Channel.AddUserAsync(user);
         }
         
         public bool DeleteUser(TestChat.ServiceReference.User user) {

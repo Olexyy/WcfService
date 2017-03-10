@@ -17,17 +17,15 @@ namespace ServiceLibrary
         [OperationContract]
         List<ChatMessage> GetMessages();
         [OperationContract]
-        void PushMessage(string message);
+        void PostMessage(ChatMessage message);
         [OperationContract]
         bool LogIn(string name, string password);
         [OperationContract]
         bool LogOut();
         [OperationContract]
-        User Authenticate(string name, string password);
-        [OperationContract]
         User GetUser();
         [OperationContract]
-        User AddUser(string name, string password);
+        bool AddUser(User user);
         [OperationContract]
         bool DeleteUser(User user);
         [OperationContract]
@@ -76,5 +74,6 @@ namespace ServiceLibrary
         public User User { get; set; }
     }
     [DataContract]
-    public enum ChatMessageTypes { [EnumMember] Posting, [EnumMember] UsersTotal, [EnumMember] UsersRegistered }
+    public enum ChatMessageTypes { [EnumMember] PostAll, [EnumMember] PostGroup, [EnumMember] GroupTotal,
+    [EnumMember] UsersTotal, [EnumMember] UsersRegistered, [EnumMember] UserDetails }
 }

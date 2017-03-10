@@ -21,9 +21,12 @@
   <xs:element name="WeathersCo.WeathersCoData" nillable="true" type="tns:WeathersCo.WeathersCoData" />
   <xs:simpleType name="ChatMessageTypes">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="Posting" />
+      <xs:enumeration value="PostAll" />
+      <xs:enumeration value="PostGroup" />
+      <xs:enumeration value="GroupTotal" />
       <xs:enumeration value="UsersTotal" />
       <xs:enumeration value="UsersRegistered" />
+      <xs:enumeration value="UserDetails" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ChatMessageTypes" nillable="true" type="tns:ChatMessageTypes" />
@@ -43,6 +46,7 @@
   <xs:element name="ChatMessage" nillable="true" type="tns:ChatMessage" />
   <xs:complexType name="User">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Group" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="LastLogin" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />

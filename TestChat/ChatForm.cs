@@ -54,8 +54,26 @@ namespace TestChat
                     this.labelTotalCount.Text = message.Text;
                 else if (message.Type == ChatMessageTypes.UsersRegistered)
                     this.labelRegisteredCount.Text = message.Text;
-                else if (message.Type == ChatMessageTypes.Posting)
+                else if (message.Type == ChatMessageTypes.PostAll || (message.Type == ChatMessageTypes.PostGroup))
                     this.listViewChat.Items.Add(new ListViewItem(new String[] { message.User.Name, DateTime.Now.ToShortDateString(), message.Text }));
+                else if (message.Type == ChatMessageTypes.UserDetails)
+                    this.UserInfo(message.User);
+                else if (message.Type == ChatMessageTypes.GroupTotal)
+                    this.labelInGroupCount.Text = message.Text;
+            }
+        }
+        private void UserInfo(User user)
+        {
+            if (user != null)
+            {
+                this.labelGroupValue.Text = user.Group;
+                this.labelStatusValue.Text = "Yes";
+            }
+                
+            else
+            {
+                this.labelGroupValue.Text = "None";
+                this.labelStatusValue.Text = "No";
             }
         }
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -63,19 +81,17 @@ namespace TestChat
             var loginForm = new LoginForm(this.ChatClient);
             loginForm.ShowDialog();
             this.LoggedIn = loginForm.LoggedIn;
-            if (this.LoggedIn)
-                this.labelStatusValue.Text = "Yes";
         }
-        private void buttonPost_Click(object sender, EventArgs e)
+        private void buttonPostAll_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(this.textBoxMessage.Text))
-                Task.Run(() => this.PushMessage(this.textBoxMessage.Text));
+                Task.Run(() => this.PostMessage(this.textBoxMessage.Text, ChatMessageTypes.PostAll));
         }
-        private void PushMessage(string text)
+        private void PostMessage(string text, ChatMessageTypes type)
         {
             try
             {
-                this.ChatClient.PushMessage(text);
+                this.ChatClient.PostMessage(new ChatMessage() { Text=text, Type = type });
                 this.Invoke(new Action(() => this.textBoxMessage.Text = String.Empty));
             }
             catch (Exception ex)
@@ -100,10 +116,10 @@ namespace TestChat
             User user = this.ChatClient.GetUser();
             if(user != null)
             {
-                var changeProfileForm = new ChangeProfileForm(user);
-                changeProfileForm.ShowDialog();
-                if (changeProfileForm.Result == ChangeProfileForm.Results.Apply)
-                    this.UpdateUser(changeProfileForm.User);
+                var profileForm = new ProfileForm(user);
+                profileForm.ShowDialog();
+                if (profileForm.Result == ProfileForm.Results.Ok)
+                    this.UpdateUser(profileForm.User);
             }
         }
         private void UpdateUser(User user )
@@ -140,6 +156,7 @@ namespace TestChat
                         this.Invoke(new Action(() => {
                             this.LoggedIn = false;
                             this.labelStatusValue.Text = "No";
+                            this.labelGroupValue.Text = "0";
                         })); 
                     }
                 }
@@ -148,6 +165,11 @@ namespace TestChat
             {
                 this.MessageBoxMarshall(ex.Message);
             }
+        }
+        private void buttonPostGroup_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(this.textBoxMessage.Text))
+                Task.Run(() => this.PostMessage(this.textBoxMessage.Text, ChatMessageTypes.PostGroup));
         }
     }
 }

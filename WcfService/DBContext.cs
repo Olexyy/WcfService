@@ -22,7 +22,7 @@ namespace ServiceLibrary
         [DataMember]
         public int UserId { get; set; }
         [Column(TypeName = "NVARCHAR")]
-        [StringLength(20)]
+        [StringLength(50)]
         [Index(IsUnique = true)]
         [MinLength(3)]
         [Required]
@@ -34,5 +34,9 @@ namespace ServiceLibrary
         public string Password { get; set; }
         [DataMember]
         public Nullable<DateTime> LastLogin { get; set; }
+        [DataMember]
+        [Column(TypeName = "NVARCHAR")]
+        [StringLength(50)]
+        public string Group { get; set; }
     }
 }
