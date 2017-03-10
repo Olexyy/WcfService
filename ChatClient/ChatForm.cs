@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TestChat.ServiceReference;
+using ChatClient.ServiceReference;
 
-namespace TestChat
+namespace ChatClient
 {
     public partial class ChatForm : Form
     {
@@ -74,7 +74,6 @@ namespace TestChat
             {
                 this.labelGroupValue.Text = "None";
                 this.labelStatusValue.Text = "No";
-                this.labelGroupValue.Text = "0";
             }
         }
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -157,7 +156,7 @@ namespace TestChat
                         this.Invoke(new Action(() => {
                             this.LoggedIn = false;
                             this.labelStatusValue.Text = "No";
-                            this.labelInGroupCount.Text = "0";
+                            this.labelGroupValue.Text = "0";
                         })); 
                     }
                 }

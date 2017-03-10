@@ -7,6 +7,8 @@ using System.IO;
 using System.Data.Entity;
 using System.Runtime.Serialization;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace ServiceLibrary
 {
@@ -76,4 +78,67 @@ namespace ServiceLibrary
     [DataContract]
     public enum ChatMessageTypes { [EnumMember] PostAll, [EnumMember] PostGroup, [EnumMember] GroupTotal,
     [EnumMember] UsersTotal, [EnumMember] UsersRegistered, [EnumMember] UserDetails }
+
+    /*public class SessionManager
+    {
+        public enum SessionManagerEvents { SessionStart, SessionEnd, Login, Logout };
+        public const string All = "All";
+        private static Dictionary<string, ObservableCollection<Service>> Sessions { get; set; }
+        static SessionManager()
+        {
+            SessionManager.Sessions = new Dictionary<string, ObservableCollection<Service>>();
+            AddSessionCollection(SessionManager.All);
+        }
+        private static void SessionEventHandler(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            var sessions = sender as ObservableCollection<Service>;
+            string key = SessionManager.Sessions.Where(i => i.Value == sessions).Select(i => i.Key).FirstOrDefault();
+            // Main collection: session start or end
+            if (key == SessionManager.All)
+                SessionManager.Sessions[SessionManager.All].ToList().ForEach(i => i.AnnounceSelf(SessionManager.CountTotal().ToString(), ChatMessageTypes.GroupTotal));
+            // Not main collection: login, logout (notify all about registered and group about group)
+            else
+            {
+                string countRegistered = SessionManager.CountRegistered().ToString();
+                sessions.ToList().ForEach(i => i.AnnounceSelf(sessions.Count.ToString(), ChatMessageTypes.GroupTotal));
+                SessionManager.Sessions[SessionManager.All].ToList().ForEach(i => i.AnnounceSelf(countRegistered, ChatMessageTypes.GroupTotal));
+                //SessionManager.Sessions.Where(i => i.Key != SessionManager.All).ToList().ForEach(j => j.Value.ToList().ForEach(y => y.AnnounceSelf(countRegistered, ChatMessageTypes.GroupTotal)));
+            }
+        }
+        private static void AddSessionCollection(string name)
+        {
+            Sessions.Add(name, new ObservableCollection<Service>());
+            Sessions[name].CollectionChanged += SessionManager.SessionEventHandler;
+        }
+        public static void Update(SessionManagerEvents sessionEvent, Service session)
+        {
+            switch (sessionEvent)
+            {
+                case SessionManagerEvents.SessionStart:
+                    SessionManager.Sessions[SessionManager.All].Add(session);
+                    break;
+                case SessionManagerEvents.SessionEnd:
+                    SessionManager.Sessions[SessionManager.All].Remove(session);
+                    break;
+                case SessionManagerEvents.Login:
+                    string key = session.User.Group;
+                    if (!SessionManager.Sessions.ContainsKey(key))
+                        SessionManager.AddSessionCollection(key);
+                    SessionManager.Sessions[key].Add(session);
+                    break;
+                case SessionManagerEvents.Logout:
+                    SessionManager.Sessions[session.User.Group].Remove(session);
+                    break;
+                default: break;
+            }
+        }
+        private static int CountTotal()
+        {
+            return SessionManager.Sessions[SessionManager.All].Count;
+        }
+        private static int CountRegistered()
+        {
+            return SessionManager.Sessions.Where(i => i.Key != SessionManager.All).ToList().Sum(i => i.Value.Count);
+        }
+    }*/
 }
