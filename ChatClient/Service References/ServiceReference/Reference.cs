@@ -15,7 +15,7 @@ namespace ChatClient.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="WeathersCo", Namespace="http://schemas.datacontract.org/2004/07/ServiceLibrary")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="WeathersCo", Namespace="http://schemas.datacontract.org/2004/07/ChatLibrary")]
     [System.SerializableAttribute()]
     public partial class WeathersCo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -75,7 +75,7 @@ namespace ChatClient.ServiceReference {
         
         [System.Diagnostics.DebuggerStepThroughAttribute()]
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-        [System.Runtime.Serialization.DataContractAttribute(Name="WeathersCo.WeathersCoData", Namespace="http://schemas.datacontract.org/2004/07/ServiceLibrary")]
+        [System.Runtime.Serialization.DataContractAttribute(Name="WeathersCo.WeathersCoData", Namespace="http://schemas.datacontract.org/2004/07/ChatLibrary")]
         [System.SerializableAttribute()]
         public partial class WeathersCoData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
             
@@ -216,7 +216,7 @@ namespace ChatClient.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ChatMessage", Namespace="http://schemas.datacontract.org/2004/07/ServiceLibrary")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ChatMessage", Namespace="http://schemas.datacontract.org/2004/07/ChatLibrary")]
     [System.SerializableAttribute()]
     public partial class ChatMessage : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -293,7 +293,7 @@ namespace ChatClient.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/ServiceLibrary")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/ChatLibrary")]
     [System.SerializableAttribute()]
     public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -401,7 +401,7 @@ namespace ChatClient.ServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ChatMessageTypes", Namespace="http://schemas.datacontract.org/2004/07/ServiceLibrary")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ChatMessageTypes", Namespace="http://schemas.datacontract.org/2004/07/ChatLibrary")]
     public enum ChatMessageTypes : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]

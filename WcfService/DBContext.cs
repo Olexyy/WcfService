@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ServiceLibrary
+namespace ChatLibrary
 {
     public class DBContext : DbContext
     {

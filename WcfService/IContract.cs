@@ -2,7 +2,6 @@
 using System.Linq;
 using System.ServiceModel;
 using System.Net;
-using System.Web.Script.Serialization;
 using System.IO;
 using System.Data.Entity;
 using System.Runtime.Serialization;
@@ -10,7 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
-namespace ServiceLibrary
+namespace ChatLibrary
 {
     [ServiceContract(SessionMode = SessionMode.Required)]
     [ServiceKnownType(typeof(ChatMessageTypes))]
@@ -79,66 +78,85 @@ namespace ServiceLibrary
     public enum ChatMessageTypes { [EnumMember] PostAll, [EnumMember] PostGroup, [EnumMember] GroupTotal,
     [EnumMember] UsersTotal, [EnumMember] UsersRegistered, [EnumMember] UserDetails }
 
-    /*public class SessionManager
+    public class Services
     {
-        public enum SessionManagerEvents { SessionStart, SessionEnd, Login, Logout };
-        public const string All = "All";
+        public enum ServicesEvents { SessionStart, SessionEnd, Login, Logout };
+        private const string All = "All";
         private static Dictionary<string, ObservableCollection<Service>> Sessions { get; set; }
-        static SessionManager()
+        static Services()
         {
-            SessionManager.Sessions = new Dictionary<string, ObservableCollection<Service>>();
-            AddSessionCollection(SessionManager.All);
+            Services.Sessions = new Dictionary<string, ObservableCollection<Service>>();
+            AddSessionCollection(Services.All);
         }
-        private static void SessionEventHandler(object sender, NotifyCollectionChangedEventArgs args)
+        public static List<Service> Group(string name)
         {
-            var sessions = sender as ObservableCollection<Service>;
-            string key = SessionManager.Sessions.Where(i => i.Value == sessions).Select(i => i.Key).FirstOrDefault();
-            // Main collection: session start or end
-            if (key == SessionManager.All)
-                SessionManager.Sessions[SessionManager.All].ToList().ForEach(i => i.AnnounceSelf(SessionManager.CountTotal().ToString(), ChatMessageTypes.GroupTotal));
-            // Not main collection: login, logout (notify all about registered and group about group)
-            else
+            return Services.Sessions[name].ToList();
+        }
+        public static List<Service> LoggedIn
+        {
+            get
             {
-                string countRegistered = SessionManager.CountRegistered().ToString();
-                sessions.ToList().ForEach(i => i.AnnounceSelf(sessions.Count.ToString(), ChatMessageTypes.GroupTotal));
-                SessionManager.Sessions[SessionManager.All].ToList().ForEach(i => i.AnnounceSelf(countRegistered, ChatMessageTypes.GroupTotal));
-                //SessionManager.Sessions.Where(i => i.Key != SessionManager.All).ToList().ForEach(j => j.Value.ToList().ForEach(y => y.AnnounceSelf(countRegistered, ChatMessageTypes.GroupTotal)));
+                return Services.Sessions[Services.All].Where(i => i.User != null).ToList();
+            }
+        }
+        public static List<Service> List
+        {
+            get
+            {
+                return Services.Sessions[Services.All].ToList();
             }
         }
         private static void AddSessionCollection(string name)
         {
             Sessions.Add(name, new ObservableCollection<Service>());
-            Sessions[name].CollectionChanged += SessionManager.SessionEventHandler;
+            Sessions[name].CollectionChanged += Services.SessionEventHandler;
         }
-        public static void Update(SessionManagerEvents sessionEvent, Service session)
+        private static void SessionEventHandler(object sender, NotifyCollectionChangedEventArgs args)
         {
-            switch (sessionEvent)
+            var sessions = sender as ObservableCollection<Service>;
+            string key = Services.Sessions.Where(i => i.Value == sessions).Select(i => i.Key).FirstOrDefault();
+            // Main collection: session start or end
+            if (key == Services.All)
+                Services.Sessions[Services.All].ToList().ForEach(i => i.Notify(Services.CountTotal().ToString(), ChatMessageTypes.UsersTotal));
+            // Not main collection: login, logout (notify all about registered and group about group)
+            else
             {
-                case SessionManagerEvents.SessionStart:
-                    SessionManager.Sessions[SessionManager.All].Add(session);
+                string countRegistered = Services.CountRegistered().ToString();
+                sessions.ToList().ForEach(i => i.Notify(sessions.Count.ToString(), ChatMessageTypes.GroupTotal));
+                Services.Sessions[Services.All].ToList().ForEach(i => i.Notify(countRegistered, ChatMessageTypes.UsersRegistered));
+            }
+        }
+        public static void Update(ServicesEvents servicesEvent, Service session)
+        {
+            switch (servicesEvent)
+            {
+                case ServicesEvents.SessionStart:
+                    Services.Sessions[Services.All].Add(session);
                     break;
-                case SessionManagerEvents.SessionEnd:
-                    SessionManager.Sessions[SessionManager.All].Remove(session);
+                case ServicesEvents.SessionEnd:
+                    if (session.User != null)
+                        Services.Sessions[session.User.Group].Remove(session);
+                    Services.Sessions[Services.All].Remove(session);
                     break;
-                case SessionManagerEvents.Login:
+                case ServicesEvents.Login:
                     string key = session.User.Group;
-                    if (!SessionManager.Sessions.ContainsKey(key))
-                        SessionManager.AddSessionCollection(key);
-                    SessionManager.Sessions[key].Add(session);
+                    if (!Services.Sessions.ContainsKey(key))
+                        Services.AddSessionCollection(key);
+                    Services.Sessions[key].Add(session);
                     break;
-                case SessionManagerEvents.Logout:
-                    SessionManager.Sessions[session.User.Group].Remove(session);
+                case ServicesEvents.Logout:
+                    Services.Sessions[session.User.Group].Remove(session);
                     break;
                 default: break;
             }
         }
         private static int CountTotal()
         {
-            return SessionManager.Sessions[SessionManager.All].Count;
+            return Services.Sessions[Services.All].Count;
         }
         private static int CountRegistered()
         {
-            return SessionManager.Sessions.Where(i => i.Key != SessionManager.All).ToList().Sum(i => i.Value.Count);
+            return Services.Sessions.Where(i => i.Key != Services.All).ToList().Sum(i => i.Value.Count);
         }
-    }*/
+    }
 }

@@ -25,7 +25,7 @@
     <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="26cfc7c7-d81b-43c4-bebb-2c684c1c25e3" SourceId="1" SourceUrl="http://testforfree.somee.com/Service.svc/mex/mex" />
     <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="869e1004-3d7b-4d3f-ba0e-c4b8be5a49d8" SourceId="1" SourceUrl="http://testforfree.somee.com/Service.svc/mex/mex" />
     <MetadataFile FileName="service21.xsd" MetadataType="Schema" ID="1bc39564-dea5-48b1-b2de-11ecd631aaf6" SourceId="1" SourceUrl="http://testforfree.somee.com/Service.svc/mex/mex" />
-    <MetadataFile FileName="ServiceLibrary1.xsd" MetadataType="Schema" ID="aadeb1de-7ce9-4a08-bedc-14b0d8749ac5" SourceId="1" SourceUrl="http://testforfree.somee.com/Service.svc/mex/mex" />
+    <MetadataFile FileName="ChatLibrary.xsd" MetadataType="Schema" ID="b136e4e6-0b83-44a7-a2e2-7b4e2646129b" SourceId="1" SourceUrl="http://testforfree.somee.com/Service.svc/mex/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

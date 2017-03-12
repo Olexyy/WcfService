@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/ServiceLibrary" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/ChatLibrary" />
   <xs:element name="GetWeather">
     <xs:complexType>
       <xs:sequence>
@@ -11,7 +11,7 @@
   <xs:element name="GetWeatherResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ServiceLibrary" minOccurs="0" name="GetWeatherResult" nillable="true" type="q1:WeathersCo" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ChatLibrary" minOccurs="0" name="GetWeatherResult" nillable="true" type="q1:WeathersCo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -23,14 +23,14 @@
   <xs:element name="GetMessagesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ServiceLibrary" minOccurs="0" name="GetMessagesResult" nillable="true" type="q2:ArrayOfChatMessage" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ChatLibrary" minOccurs="0" name="GetMessagesResult" nillable="true" type="q2:ArrayOfChatMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="PostMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ServiceLibrary" minOccurs="0" name="message" nillable="true" type="q3:ChatMessage" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ChatLibrary" minOccurs="0" name="message" nillable="true" type="q3:ChatMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -74,14 +74,14 @@
   <xs:element name="GetUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ServiceLibrary" minOccurs="0" name="GetUserResult" nillable="true" type="q4:User" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ChatLibrary" minOccurs="0" name="GetUserResult" nillable="true" type="q4:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ServiceLibrary" minOccurs="0" name="user" nillable="true" type="q5:User" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ChatLibrary" minOccurs="0" name="user" nillable="true" type="q5:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -95,7 +95,7 @@
   <xs:element name="DeleteUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ServiceLibrary" minOccurs="0" name="user" nillable="true" type="q6:User" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ChatLibrary" minOccurs="0" name="user" nillable="true" type="q6:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -109,7 +109,7 @@
   <xs:element name="UpdateUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ServiceLibrary" minOccurs="0" name="user" nillable="true" type="q7:User" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ChatLibrary" minOccurs="0" name="user" nillable="true" type="q7:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

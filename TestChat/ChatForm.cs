@@ -48,18 +48,21 @@ namespace TestChat
         }
         private void HandleMessages(List<ChatMessage> messages)
         {
-            foreach(ChatMessage message in messages)
+            if(messages != null)
             {
-                if (message.Type == ChatMessageTypes.UsersTotal)
-                    this.labelTotalCount.Text = message.Text;
-                else if (message.Type == ChatMessageTypes.UsersRegistered)
-                    this.labelRegisteredCount.Text = message.Text;
-                else if (message.Type == ChatMessageTypes.PostAll || (message.Type == ChatMessageTypes.PostGroup))
-                    this.listViewChat.Items.Add(new ListViewItem(new String[] { message.User.Name, DateTime.Now.ToShortDateString(), message.Text }));
-                else if (message.Type == ChatMessageTypes.UserDetails)
-                    this.UserInfo(message.User);
-                else if (message.Type == ChatMessageTypes.GroupTotal)
-                    this.labelInGroupCount.Text = message.Text;
+                foreach (ChatMessage message in messages)
+                {
+                    if (message.Type == ChatMessageTypes.UsersTotal)
+                        this.labelTotalCount.Text = message.Text;
+                    else if (message.Type == ChatMessageTypes.UsersRegistered)
+                        this.labelRegisteredCount.Text = message.Text;
+                    else if (message.Type == ChatMessageTypes.PostAll || (message.Type == ChatMessageTypes.PostGroup))
+                        this.listViewChat.Items.Add(new ListViewItem(new String[] { message.User.Name, DateTime.Now.ToShortDateString(), message.Text }));
+                    else if (message.Type == ChatMessageTypes.UserDetails)
+                        this.UserInfo(message.User);
+                    else if (message.Type == ChatMessageTypes.GroupTotal)
+                        this.labelInGroupCount.Text = message.Text;
+                }
             }
         }
         private void UserInfo(User user)
@@ -158,6 +161,7 @@ namespace TestChat
                             this.LoggedIn = false;
                             this.labelStatusValue.Text = "No";
                             this.labelInGroupCount.Text = "0";
+                            this.labelGroupValue.Text = "None";
                         })); 
                     }
                 }

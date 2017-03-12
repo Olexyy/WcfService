@@ -5,15 +5,15 @@ namespace WcfService.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ServiceLibrary.DBContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ChatLibrary.DBContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "ServiceLibrary.DBContext";
+            ContextKey = "ChatLibrary.DBContext";
         }
 
-        protected override void Seed(ServiceLibrary.DBContext context)
+        protected override void Seed(ChatLibrary.DBContext context)
         {
             //  This method will be called after migrating to the latest version.
 

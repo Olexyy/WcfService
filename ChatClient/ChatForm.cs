@@ -74,6 +74,7 @@ namespace ChatClient
             {
                 this.labelGroupValue.Text = "None";
                 this.labelStatusValue.Text = "No";
+                this.labelInGroupCount.Text = "0";
             }
         }
         private void buttonLogin_Click(object sender, EventArgs e)

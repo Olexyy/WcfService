@@ -61,9 +61,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WcfService\ServiceLibrary.csproj">
+    <ProjectReference Include="..\WcfService\ChatService.csproj">
       <Project>{CBBD8A63-DEA7-4F45-A1B7-C72BE1CDB621}</Project>
-      <Name>ServiceLibrary</Name>
+      <Name>ChatService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
