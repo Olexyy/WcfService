@@ -43,6 +43,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -131,16 +132,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WCFServiceClient\WCFServiceClient.csproj">
-      <Project>{952A3425-46A5-4F1F-8F09-70E6EEE3CFCE}</Project>
-      <Name>WCFServiceClient</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WcfService\ChatService.csproj">
       <Project>{CBBD8A63-DEA7-4F45-A1B7-C72BE1CDB621}</Project>
       <Name>ChatService</Name>

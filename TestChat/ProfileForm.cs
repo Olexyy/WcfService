@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestChat.ServiceReference;
 
-namespace TestChat
-{
+namespace ChatClient {
     public partial class ProfileForm : Form
     {
         public enum Results { Ok, Cancel }
@@ -24,7 +23,6 @@ namespace TestChat
             this.textBoxPassword.Text = user.Password;
             this.textBoxGroup.Text = user.Group;
         }
-
         private void buttonApply_Click(object sender, EventArgs e)
         {
             this.Result = Results.Ok;
@@ -33,7 +31,6 @@ namespace TestChat
             this.User.Group = this.textBoxGroup.Text.Trim();
             this.Close();
         }
-
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.Result = Results.Cancel;

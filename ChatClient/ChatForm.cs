@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 using ChatClient.ServiceReference;
 
 namespace ChatClient
@@ -20,6 +21,8 @@ namespace ChatClient
         public ChatForm()
         {
             this.ChatClient = new ContractChatClient();
+            var credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings.Get("login"), ConfigurationManager.AppSettings.Get("pass"));
+            this.ChatClient.ClientCredentials.Windows.ClientCredential = new System.Net.NetworkCredential("inua", "1qaz!QAZ");
             this.InitializeComponent();
             this.PollingTimer = new Timer();
             this.PollingTimer.Tick += this.PollingEventHandler;
@@ -54,15 +57,16 @@ namespace ChatClient
                     this.labelTotalCount.Text = message.Text;
                 else if (message.Type == ChatMessageTypes.UsersRegistered)
                     this.labelRegisteredCount.Text = message.Text;
-                else if (message.Type == ChatMessageTypes.PostAll || (message.Type == ChatMessageTypes.PostGroup))
-                    this.listViewChat.Items.Add(new ListViewItem(new String[] { message.User.Name, DateTime.Now.ToShortDateString(), message.Text }));
-                else if (message.Type == ChatMessageTypes.UserDetails)
-                    this.UserInfo(message.User);
                 else if (message.Type == ChatMessageTypes.GroupTotal)
                     this.labelInGroupCount.Text = message.Text;
+                else if (message.Type == ChatMessageTypes.UserDetails)
+                    this.UserInfo(message.User);
+                // Non service messages.
+                else if (message.Type == ChatMessageTypes.PostAll || (message.Type == ChatMessageTypes.PostGroup))
+                    this.listViewChat.Items.Add(new ListViewItem(new String[] { message.User.Name, DateTime.Now.ToShortDateString(), message.Text }));
             }
         }
-        private void UserInfo(User user)
+        private void UserInfo(User user = null)
         {
             if (user != null)
             {
@@ -156,8 +160,7 @@ namespace ChatClient
                         this.MessageBoxMarshall("User logged out.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Invoke(new Action(() => {
                             this.LoggedIn = false;
-                            this.labelStatusValue.Text = "No";
-                            this.labelGroupValue.Text = "0";
+                            this.UserInfo();
                         })); 
                     }
                 }

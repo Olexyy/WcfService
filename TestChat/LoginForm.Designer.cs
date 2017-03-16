@@ -1,4 +1,4 @@
-﻿namespace TestChat
+﻿namespace ChatClient
 {
     partial class LoginForm
     {

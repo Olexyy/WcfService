@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestChat.ServiceReference;
 
-namespace TestChat
+namespace ChatClient
 {
     public partial class LoginForm : Form
     {

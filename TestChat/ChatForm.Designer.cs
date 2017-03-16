@@ -1,4 +1,4 @@
-﻿namespace TestChat
+﻿namespace ChatClient
 {
     partial class ChatForm
     {
@@ -50,12 +50,17 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.buttonProfie = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.buttonCsatAll = new System.Windows.Forms.Button();
+            this.groupBoxbuttons = new System.Windows.Forms.GroupBox();
+            this.buttonStopCasting = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonPostGroup = new System.Windows.Forms.Button();
+            this.buttonCastGroup = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBoxbuttons.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,7 +113,7 @@
             // 
             // buttonPostAll
             // 
-            this.buttonPostAll.Location = new System.Drawing.Point(392, 19);
+            this.buttonPostAll.Location = new System.Drawing.Point(279, 21);
             this.buttonPostAll.Name = "buttonPostAll";
             this.buttonPostAll.Size = new System.Drawing.Size(107, 23);
             this.buttonPostAll.TabIndex = 3;
@@ -139,7 +144,7 @@
             this.textBoxMessage.Location = new System.Drawing.Point(6, 19);
             this.textBoxMessage.Multiline = true;
             this.textBoxMessage.Name = "textBoxMessage";
-            this.textBoxMessage.Size = new System.Drawing.Size(371, 83);
+            this.textBoxMessage.Size = new System.Drawing.Size(258, 83);
             this.textBoxMessage.TabIndex = 6;
             // 
             // labelStatusText
@@ -255,19 +260,51 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.buttonClear);
-            this.groupBox3.Controls.Add(this.buttonPostGroup);
+            this.groupBox3.Controls.Add(this.buttonCsatAll);
             this.groupBox3.Controls.Add(this.textBoxMessage);
             this.groupBox3.Controls.Add(this.buttonPostAll);
+            this.groupBox3.Controls.Add(this.groupBoxbuttons);
             this.groupBox3.Location = new System.Drawing.Point(12, 258);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(515, 115);
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             // 
+            // buttonCsatAll
+            // 
+            this.buttonCsatAll.Enabled = false;
+            this.buttonCsatAll.Location = new System.Drawing.Point(392, 21);
+            this.buttonCsatAll.Name = "buttonCsatAll";
+            this.buttonCsatAll.Size = new System.Drawing.Size(107, 23);
+            this.buttonCsatAll.TabIndex = 14;
+            this.buttonCsatAll.Text = "Cast screen all";
+            this.buttonCsatAll.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxbuttons
+            // 
+            this.groupBoxbuttons.Controls.Add(this.buttonStopCasting);
+            this.groupBoxbuttons.Controls.Add(this.buttonClear);
+            this.groupBoxbuttons.Controls.Add(this.buttonPostGroup);
+            this.groupBoxbuttons.Controls.Add(this.buttonCastGroup);
+            this.groupBoxbuttons.Location = new System.Drawing.Point(270, 10);
+            this.groupBoxbuttons.Name = "groupBoxbuttons";
+            this.groupBoxbuttons.Size = new System.Drawing.Size(238, 99);
+            this.groupBoxbuttons.TabIndex = 16;
+            this.groupBoxbuttons.TabStop = false;
+            // 
+            // buttonStopCasting
+            // 
+            this.buttonStopCasting.Location = new System.Drawing.Point(122, 69);
+            this.buttonStopCasting.Name = "buttonStopCasting";
+            this.buttonStopCasting.Size = new System.Drawing.Size(107, 23);
+            this.buttonStopCasting.TabIndex = 15;
+            this.buttonStopCasting.Text = "Stop casting";
+            this.buttonStopCasting.UseVisualStyleBackColor = true;
+            this.buttonStopCasting.Click += new System.EventHandler(this.buttonStopCasting_Click);
+            // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(392, 79);
+            this.buttonClear.Location = new System.Drawing.Point(9, 69);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(107, 23);
             this.buttonClear.TabIndex = 8;
@@ -277,13 +314,23 @@
             // 
             // buttonPostGroup
             // 
-            this.buttonPostGroup.Location = new System.Drawing.Point(392, 50);
+            this.buttonPostGroup.Location = new System.Drawing.Point(9, 40);
             this.buttonPostGroup.Name = "buttonPostGroup";
             this.buttonPostGroup.Size = new System.Drawing.Size(107, 23);
             this.buttonPostGroup.TabIndex = 7;
             this.buttonPostGroup.Text = "Post group";
             this.buttonPostGroup.UseVisualStyleBackColor = true;
             this.buttonPostGroup.Click += new System.EventHandler(this.buttonPostGroup_Click);
+            // 
+            // buttonCastGroup
+            // 
+            this.buttonCastGroup.Location = new System.Drawing.Point(122, 40);
+            this.buttonCastGroup.Name = "buttonCastGroup";
+            this.buttonCastGroup.Size = new System.Drawing.Size(107, 23);
+            this.buttonCastGroup.TabIndex = 13;
+            this.buttonCastGroup.Text = "Cast screen group";
+            this.buttonCastGroup.UseVisualStyleBackColor = true;
+            this.buttonCastGroup.Click += new System.EventHandler(this.buttonCastGroup_Click);
             // 
             // groupBox4
             // 
@@ -300,7 +347,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(537, 385);
+            this.ClientSize = new System.Drawing.Size(537, 379);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox4);
             this.Name = "ChatForm";
@@ -312,6 +359,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBoxbuttons.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -344,5 +392,9 @@
         private System.Windows.Forms.Label labelGroupText;
         private System.Windows.Forms.Label labelGroupValue;
         private System.Windows.Forms.Button buttonClear;
+        private System.Windows.Forms.Button buttonCastGroup;
+        private System.Windows.Forms.Button buttonCsatAll;
+        private System.Windows.Forms.Button buttonStopCasting;
+        private System.Windows.Forms.GroupBox groupBoxbuttons;
     }
 }

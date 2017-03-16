@@ -224,6 +224,9 @@ namespace TestChat.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] BinaryDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TextField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -239,6 +242,19 @@ namespace TestChat.ServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] BinaryData {
+            get {
+                return this.BinaryDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BinaryDataField, value) != true)) {
+                    this.BinaryDataField = value;
+                    this.RaisePropertyChanged("BinaryData");
+                }
             }
         }
         
@@ -421,6 +437,15 @@ namespace TestChat.ServiceReference {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         UserDetails = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Cast = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CastStart = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CastEnd = 8,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -517,10 +542,10 @@ namespace TestChat.ServiceReference {
         System.Threading.Tasks.Task<bool> DeleteUserAsync(TestChat.ServiceReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/UpdateUser", ReplyAction="http://tempuri.org/IContractChat/UpdateUserResponse")]
-        bool UpdateUser(TestChat.ServiceReference.User user);
+        bool UpdateUser(TestChat.ServiceReference.User user, bool reLogin);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContractChat/UpdateUser", ReplyAction="http://tempuri.org/IContractChat/UpdateUserResponse")]
-        System.Threading.Tasks.Task<bool> UpdateUserAsync(TestChat.ServiceReference.User user);
+        System.Threading.Tasks.Task<bool> UpdateUserAsync(TestChat.ServiceReference.User user, bool reLogin);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -606,12 +631,12 @@ namespace TestChat.ServiceReference {
             return base.Channel.DeleteUserAsync(user);
         }
         
-        public bool UpdateUser(TestChat.ServiceReference.User user) {
-            return base.Channel.UpdateUser(user);
+        public bool UpdateUser(TestChat.ServiceReference.User user, bool reLogin) {
+            return base.Channel.UpdateUser(user, reLogin);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateUserAsync(TestChat.ServiceReference.User user) {
-            return base.Channel.UpdateUserAsync(user);
+        public System.Threading.Tasks.Task<bool> UpdateUserAsync(TestChat.ServiceReference.User user, bool reLogin) {
+            return base.Channel.UpdateUserAsync(user, reLogin);
         }
     }
 }

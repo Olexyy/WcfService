@@ -14,11 +14,8 @@ namespace ChatLibrary
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession, ConcurrencyMode = ConcurrencyMode.Single)]
     public class Service : IContractChat, IContractWeather
     {
-
         private List<ChatMessage> Messages { get; set; }
-
         public User User { get; set; }
-
         public Service()
         {
             this.User = null;
@@ -34,9 +31,9 @@ namespace ChatLibrary
             else
                 return Services.Group(this.User.Group);
         }
-        public void Notify(string text, ChatMessageTypes type, User user = null)
+        public void Notify(string text, ChatMessageTypes type, User user = null, byte[] binaryData = null)
         {
-            this.Messages.Add(new ChatMessage() { Text = text, User = user, Type = type });
+            this.Messages.Add(new ChatMessage() { Text = text, User = user, Type = type, BinaryData = binaryData });
         }
         private void ServiceSessionClosed(object sender, EventArgs e)
         {
@@ -45,9 +42,11 @@ namespace ChatLibrary
         public void PostMessage(ChatMessage message)
         {
             if (message.Type == ChatMessageTypes.PostAll)
-                Services.List.ForEach(i => i.Notify(message.Text, message.Type, this.User));
+                Services.All.ForEach(i => i.Notify(message.Text, message.Type, this.User));
             else if (message.Type == ChatMessageTypes.PostGroup)
                 Services.Group(this.User.Group).ForEach(i => i.Notify(message.Text, message.Type, this.User));
+            else if (message.Type == ChatMessageTypes.Cast)
+                Services.Group(this.User.Group).ForEach(i => i.Notify(message.Text, message.Type, this.User, message.BinaryData));
         }
         public List<ChatMessage> GetMessages()
         {
@@ -66,7 +65,7 @@ namespace ChatLibrary
                 {
                     var user = result.First();
                     user.LastLogin = DateTime.Now;
-                    this.UpdateUser(user);
+                    this.UpdateUser(user, false);
                     this.User = user;
                     Services.Update(Services.ServicesEvents.Login, this);
                     return true;
@@ -107,7 +106,7 @@ namespace ChatLibrary
                 }
             }
         }
-        public bool UpdateUser(User user)
+        public bool UpdateUser(User user, bool reLogin = true)
         {
             using (DBContext DB = new DBContext())
             {
@@ -115,8 +114,12 @@ namespace ChatLibrary
                 {
                     DB.Entry(user).State = EntityState.Modified;
                     DB.SaveChanges();
-                    this.User = user;
-                    this.Notify(String.Empty, ChatMessageTypes.UserDetails, this.User);
+                    if(reLogin)
+                    {
+                        Services.Update(Services.ServicesEvents.Logout, this);
+                        this.User = user;
+                        Services.Update(Services.ServicesEvents.Login, this);
+                    }
                     return true;
                 }
                 catch
@@ -133,6 +136,7 @@ namespace ChatLibrary
                 {
                     DB.Users.Remove(user);
                     DB.SaveChanges();
+                    Services.Update(Services.ServicesEvents.Logout, this);
                     this.User = null;
                     return true;
                 }

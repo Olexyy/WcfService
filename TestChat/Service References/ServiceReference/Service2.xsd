@@ -110,6 +110,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ChatLibrary" minOccurs="0" name="user" nillable="true" type="q7:User" />
+        <xs:element minOccurs="0" name="reLogin" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

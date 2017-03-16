@@ -77,7 +77,6 @@
             // 
             this.textBoxGroup.Location = new System.Drawing.Point(100, 64);
             this.textBoxGroup.Name = "textBoxGroup";
-            this.textBoxGroup.PasswordChar = '*';
             this.textBoxGroup.Size = new System.Drawing.Size(141, 20);
             this.textBoxGroup.TabIndex = 4;
             // 
